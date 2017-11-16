@@ -1,0 +1,20 @@
+{
+  "name": "babel-plugin-openui5-remove-support",
+  "license": "Apache-2.0",
+  "author": "Christoph Kraemer <chr.kraemer@sap.com>",
+  "keywords": [
+    "openui5",
+    "sapui5",
+    "babel",
+    "plugin",
+    "support"
+  ],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cevou/openui5-webpack/blob/master/packages/babel-plugin-openui5-remove-support"
+  },
+  "bugs": {
+    "url": "https://github.com/cevou/openui5-webpack/issues"
+  }
+}

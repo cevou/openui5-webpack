@@ -1,0 +1,13 @@
+sudo: false
+language: node_js
+node_js:
+  - "6"
+  - "7"
+  - "8"
+  - "9"
+cache:
+  directories:
+    - packages/babel-plugin-openui5-remove-support/node_modules
+    - packages/openui5-renderer-loader/node_modules
+    - packages/openui5-webpack-plugin/node_modules
+    - packages/openui5-xml-loader/node_modules

@@ -1,0 +1,57 @@
+{
+  "name": "openui5-webpack-plugin",
+  "license": "Apache-2.0",
+  "author": "Christoph Kraemer <chr.kraemer@sap.com>",
+  "keywords": [
+    "openui5",
+    "sapui5",
+    "webpack"
+  ],
+  "main": "lib/OpenUI5Plugin.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cevou/openui5-webpack/blob/master/packages/openui5-webpack-plugin"
+  },
+  "bugs": {
+    "url": "https://github.com/cevou/openui5-webpack/issues"
+  },
+  "scripts": {
+    "lint": "eslint --cache src test",
+    "test": "jest",
+    "test:coverage": "jest --collectCoverageFrom='src/**/*.js' --coverage --coverageReporters=html"
+  },
+  "peerDependencies": {
+    "webpack": "^2.0.0 || ^3.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "cross-env": "^5.1.1",
+    "eslint": "^4.11.0",
+    "eslint-plugin-node": "^5.2.1",
+    "jest": "^21.2.1",
+    "webpack": "^3.8.1"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "node"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:node/recommended"
+    ],
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2017
+    },
+    "rules": {
+      "quotes": [
+        "error",
+        "single"
+      ]
+    }
+  },
+  "dependencies": {}
+}

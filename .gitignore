@@ -1,0 +1,6 @@
+.idea
+coverage
+dist
+node_modules
+
+lerna-debug.log
