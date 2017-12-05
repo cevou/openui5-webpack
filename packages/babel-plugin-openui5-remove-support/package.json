@@ -1,5 +1,6 @@
 {
   "name": "babel-plugin-openui5-remove-support",
+  "description": "Remove static support dependencies in UI5",
   "license": "Apache-2.0",
   "author": "Christoph Kraemer <chr.kraemer@sap.com>",
   "keywords": [
