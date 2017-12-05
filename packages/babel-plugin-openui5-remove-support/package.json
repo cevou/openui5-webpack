@@ -16,5 +16,6 @@
   },
   "bugs": {
     "url": "https://github.com/cevou/openui5-webpack/issues"
-  }
+  },
+  "version": "0.0.1"
 }
