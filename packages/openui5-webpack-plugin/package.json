@@ -1,7 +1,7 @@
 {
   "name": "openui5-webpack-plugin",
   "description": "Build UI5 applications with webpack",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "Apache-2.0",
   "author": "Christoph Kraemer <chr.kraemer@sap.com>",
   "keywords": [
