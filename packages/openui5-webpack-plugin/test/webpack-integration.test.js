@@ -11,11 +11,11 @@ describe('Integration TestCases', () => {
     it(testCase, (done) => {
       let options = {
         entry: {
-          build: './index.js'
+          build: './index.js',
         },
         plugins: [
-          new OpenUI5Plugin()
-        ]
+          new OpenUI5Plugin(),
+        ],
       };
 
       const testDirectory = path.join(__dirname, 'cases', testCase);

@@ -1,5 +1,3 @@
-'use strict';
-
 const NullDependency = require('webpack/lib/dependencies/NullDependency');
 
 class OpenUI5DefineDependency extends NullDependency {
@@ -22,20 +20,20 @@ OpenUI5DefineDependency.Template = class UI5DefineDependencyTemplate {
       f: [
         'var __WEBPACK_UI5_DEFINE_RESULT__;',
         `!(__WEBPACK_UI5_DEFINE_RESULT__ = #.call(exports, __webpack_require__, exports, module),
-				__WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__))`,
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__))`,
       ],
       af: [
         'var __WEBPACK_UI5_DEFINE_ARRAY__, __WEBPACK_UI5_DEFINE_RESULT__;',
         `!(__WEBPACK_UI5_DEFINE_ARRAY__ = #, __WEBPACK_UI5_DEFINE_RESULT__ = #.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__),
-				__WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__))`,
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__))`,
       ],
       lf: [
-        "var XXX, XXXmodule;",
-        "!(XXXmodule = { id: YYY, exports: {}, loaded: false }, XXX = #.call(XXXmodule.exports, __webpack_require__, XXXmodule.exports, XXXmodule), XXXmodule.loaded = true, XXX === undefined && (XXX = XXXmodule.exports))"
+        'var XXX, XXXmodule;',
+        '!(XXXmodule = { id: YYY, exports: {}, loaded: false }, XXX = #.call(XXXmodule.exports, __webpack_require__, XXXmodule.exports, XXXmodule), XXXmodule.loaded = true, XXX === undefined && (XXX = XXXmodule.exports))',
       ],
       laf: [
-        "var __WEBPACK_UI5_DEFINE_ARRAY__, XXX;",
-        "!(__WEBPACK_UI5_DEFINE_ARRAY__ = #, XXX = (#.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__)))"
+        'var __WEBPACK_UI5_DEFINE_ARRAY__, XXX;',
+        '!(__WEBPACK_UI5_DEFINE_ARRAY__ = #, XXX = (#.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__)))',
       ],
     };
   }
@@ -53,7 +51,7 @@ OpenUI5DefineDependency.Template = class UI5DefineDependencyTemplate {
   }
 
   branch(dependency) {
-    const localModuleVar = this.localModuleVar(dependency) ? "l" : "";
+    const localModuleVar = this.localModuleVar(dependency) ? 'l' : '';
     const arrayRange = dependency.arrayRange ? 'a' : '';
     const functionRange = dependency.functionRange ? 'f' : '';
     return localModuleVar + arrayRange + functionRange;
@@ -61,12 +59,12 @@ OpenUI5DefineDependency.Template = class UI5DefineDependencyTemplate {
 
   replace(dependency, source, definition, text) {
     const localModuleVar = this.localModuleVar(dependency);
-    if(localModuleVar) {
-      text = text.replace(/XXX/g, localModuleVar.replace(/\$/g, "$$$$"));
-      definition = definition.replace(/XXX/g, localModuleVar.replace(/\$/g, "$$$$"));
+    if (localModuleVar) {
+      text = text.replace(/XXX/g, localModuleVar.replace(/\$/g, '$$$$'));
+      definition = definition.replace(/XXX/g, localModuleVar.replace(/\$/g, '$$$$'));
     }
 
-    if(dependency.namedModule) {
+    if (dependency.namedModule) {
       text = text.replace(/YYY/g, JSON.stringify(dependency.namedModule));
     }
 

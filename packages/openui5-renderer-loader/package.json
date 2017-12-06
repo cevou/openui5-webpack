@@ -1,6 +1,7 @@
 {
   "name": "openui5-renderer-loader",
   "description": "Add renderer dependencies to UI5 controls in webpack build",
+  "version": "0.0.1",
   "license": "Apache-2.0",
   "author": "Christoph Kraemer <chr.kraemer@sap.com>",
   "keywords": [
@@ -10,7 +11,7 @@
     "loader",
     "renderer"
   ],
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/cevou/openui5-webpack/blob/master/packages/openui5-renderer-loader"
@@ -18,8 +19,14 @@
   "bugs": {
     "url": "https://github.com/cevou/openui5-webpack/issues"
   },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src -d dist"
+  },
   "dependencies": {
     "xml2js": "^0.4.19"
   },
-  "version": "0.0.1"
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "cross-env": "^5.1.1"
+  }
 }

@@ -1,7 +1,5 @@
-'use strict';
-
-const LocalModulesHelpers = require("webpack/lib/dependencies/LocalModulesHelpers");
-const LocalModuleDependency = require("webpack/lib/dependencies/LocalModuleDependency");
+const LocalModulesHelpers = require('webpack/lib/dependencies/LocalModulesHelpers');
+const LocalModuleDependency = require('webpack/lib/dependencies/LocalModuleDependency');
 const OpenUI5DefineDependency = require('./OpenUI5DefineDependency');
 const OpenUI5RequireItemDependency = require('./OpenUI5RequireItemDependency');
 
@@ -15,17 +13,17 @@ class OpenUI5DefineDependencyParserPlugin {
   }
 
   apply(parser) {
-    const options = this.options;
-
     parser.plugin('call sap.ui.define', (expr) => {
-      let array, fn, namedModule;
+      let array;
+      let fn;
+      let namedModule;
 
-      switch(expr.arguments.length) {
+      switch (expr.arguments.length) {
         case 1:
           fn = expr.arguments[0];
           break;
         case 2:
-          if (expr.arguments[0].type === "Literal") {
+          if (expr.arguments[0].type === 'Literal') {
             namedModule = expr.arguments[0].value;
             fn = expr.arguments[1];
           } else if (expr.arguments[0].type === 'ArrayExpression') {
@@ -36,7 +34,7 @@ class OpenUI5DefineDependencyParserPlugin {
           }
           break;
         case 3:
-          if (expr.arguments[0].type === "Literal") {
+          if (expr.arguments[0].type === 'Literal') {
             namedModule = expr.arguments[0].value;
             array = expr.arguments[1];
             fn = expr.arguments[2];
@@ -49,12 +47,13 @@ class OpenUI5DefineDependencyParserPlugin {
           namedModule = expr.arguments[0].value;
           array = expr.arguments[1];
           fn = expr.arguments[2];
+        // no default
       }
 
       if (array) {
         const param = parser.evaluateExpression(array);
         const result = parser.applyPluginsBailResult('call define:openui5:array', expr, param, namedModule);
-        if (!result) return;
+        if (!result) return false;
       }
 
       if (fn && fn.type === 'FunctionExpression') {
@@ -69,10 +68,10 @@ class OpenUI5DefineDependencyParserPlugin {
         expr.range,
         array ? array.range : null,
         fn ? fn.range : null,
-        namedModule ? namedModule : null
+        namedModule || null,
       );
       dep.loc = expr.loc;
-      if(namedModule) {
+      if (namedModule) {
         dep.localModule = LocalModulesHelpers.addLocalModule(parser.state, namedModule);
       }
       parser.state.current.addDependency(dep);
@@ -87,8 +86,9 @@ class OpenUI5DefineDependencyParserPlugin {
     });
 
     parser.plugin('call define:openui5:item', (expr, param, namedModule) => {
-      let dep, localModule;
-      if(localModule = LocalModulesHelpers.getLocalModule(parser.state, param.string, namedModule)) {
+      let dep;
+      const localModule = LocalModulesHelpers.getLocalModule(parser.state, param.string, namedModule);
+      if (localModule) {
         dep = new LocalModuleDependency(localModule, param.range);
       } else {
         dep = new OpenUI5RequireItemDependency(param.string, param.range);

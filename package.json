@@ -4,15 +4,28 @@
   "scripts": {
     "postinstall": "lerna bootstrap --stream",
     "publish": "lerna publish",
-    "test": "lerna run test --stream"
+    "test": "lerna run test --stream",
+    "lint": "eslint . --cache",
+    "prepublish": "npm run build",
+    "build": "lerna run build --stream"
   },
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.12.1",
+    "eslint-config-webpack": "^1.2.5",
+    "eslint-plugin-import": "^2.8.0",
     "lerna": "^2.5.1"
   },
   "eslintConfig": {
     "extends": [
       "webpack"
-    ]
+    ],
+    "rules": {
+      "class-methods-use-this": 0,
+      "prefer-destructuring": 0,
+      "no-param-reassign": 0
+    }
   },
   "engines": {
     "node": ">=6.0.0"

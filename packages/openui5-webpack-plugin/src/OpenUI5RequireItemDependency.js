@@ -1,5 +1,3 @@
-'use strict';
-
 const ModuleDependency = require('webpack/lib/dependencies/ModuleDependency');
 const ModuleDependencyTemplateAsRequireId = require('./ModuleDependencyTemplateAsRequireId');
 

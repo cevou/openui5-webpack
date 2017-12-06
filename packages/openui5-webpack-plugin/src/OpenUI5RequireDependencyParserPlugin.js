@@ -1,5 +1,3 @@
-'use strict';
-
 const OpenUI5LazyInstanceDependency = require('./OpenUI5LazyInstanceDependency');
 const OpenUI5RequireItemDependency = require('./OpenUI5RequireItemDependency');
 const OpenUI5RequireContextDependency = require('./OpenUI5RequireContextDependency');
@@ -30,13 +28,14 @@ class OpenUI5RequireDependencyParserPlugin {
         parser.applyPluginsBailResult('call require:openui5:array', expr, param);
         return true;
       }
+      return false;
     });
 
     parser.plugin('call sap.ui.requireSync', (expr) => {
       const param = parser.evaluateExpression(expr.arguments[0]);
 
       let result = parser.applyPluginsBailResult('call require:openui5:item', expr, param);
-      if (result === undefined) {
+      if (!result) {
         result = parser.applyPluginsBailResult('call require:openui5:context', expr, param);
       }
       return result;
@@ -51,6 +50,7 @@ class OpenUI5RequireDependencyParserPlugin {
         parser.state.current.addDependency(dep);
         return true;
       }
+      return false;
     });
 
     parser.plugin('call jQuery.sap.require', (expr) => {
@@ -59,6 +59,7 @@ class OpenUI5RequireDependencyParserPlugin {
         parser.applyPluginsBailResult('call require:openui5:item', expr, param);
         return true;
       }
+      return false;
     });
 
     parser.plugin('call $.sap.require', (expr) => {
@@ -67,6 +68,7 @@ class OpenUI5RequireDependencyParserPlugin {
         parser.applyPluginsBailResult('call require:openui5:item', expr, param);
         return true;
       }
+      return false;
     });
 
     parser.plugin('call require:openui5:array', (expr, param) => {
@@ -79,7 +81,7 @@ class OpenUI5RequireDependencyParserPlugin {
     parser.plugin('call require:openui5:item', (expr, param) => {
       if (param.isString()) {
         let item = param.string;
-        if (item.substr(0, 10) !== 'jquery.sap' && item.substr(0, 2) !== "./") {
+        if (item.substr(0, 10) !== 'jquery.sap' && item.substr(0, 2) !== './') {
           item = item.replace(/\./g, '/');
         }
         const dep = new OpenUI5RequireItemDependency(item, expr.range);
@@ -88,11 +90,12 @@ class OpenUI5RequireDependencyParserPlugin {
         parser.state.current.addDependency(dep);
         return true;
       }
+      return false;
     });
 
     parser.plugin('call require:openui5:context', (expr, param) => {
       const dep = ContextDependencyHelpers.create(OpenUI5RequireContextDependency, expr.range, param, expr, options);
-      if (!dep) return;
+      if (!dep) return false;
       dep.loc = expr.loc;
       dep.optional = !!parser.scope.inTry;
       parser.state.current.addDependency(dep);

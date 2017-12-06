@@ -1,6 +1,9 @@
-module.exports = function(source) {
+module.exports = function (source) {
   const path = this.resourcePath;
   const control = path.match(/[/\\]resources[/\\](.*)\.js$/);
+
+  let output = source;
+
   if (control) {
     const callback = this.async();
     const name = control[1].replace(/\\/g, '/');
@@ -8,11 +11,12 @@ module.exports = function(source) {
     this.resolve(this.context, rendererName, (err) => {
       if (!err) {
         this.addDependency(rendererName);
-        source = `${source}\njQuery.sap.setObject("${rendererName.replace(/\//g, '.')}", require("${rendererName}"));`;
+        output = `${source}\njQuery.sap.setObject("${rendererName.replace(/\//g, '.')}", require("${rendererName}"));`;
       }
-      callback(null, source);
+      callback(null, output);
     });
   } else {
-    return source;
+    return output;
   }
+  return '';
 };

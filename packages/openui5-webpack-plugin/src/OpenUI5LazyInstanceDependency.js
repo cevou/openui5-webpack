@@ -1,6 +1,5 @@
-'use strict';
-
 const ModuleDependency = require('webpack/lib/dependencies/ModuleDependency');
+const WebpackMissingModule = require('webpack/lib/dependencies/WebpackMissingModule');
 
 class OpenUI5LazyInstanceDependency extends ModuleDependency {
   constructor(request, instance, range) {
@@ -17,16 +16,15 @@ class OpenUI5LazyInstanceDependency extends ModuleDependency {
 OpenUI5LazyInstanceDependency.Template = class OpenUI5LazyInstanceDependencyTemplate {
   apply(dep, source, outputOptions, requestShortener) {
     if (!dep.range) return;
-    const comment = outputOptions.pathinfo ?
-      `/*! ${requestShortener.shorten(dep.request)} */ ` : '';
+    const comment = outputOptions.pathinfo ? `/*! ${requestShortener.shorten(dep.request)} */ ` : '';
     let content;
     if (dep.module) {
       content = `(${dep.instance} instanceof __webpack_require__(${comment}${JSON.stringify(dep.module.id)}))`;
     } else {
-      content = require('webpack/lib/dependencies/WebpackMissingModule').module(dep.request);
+      content = WebpackMissingModule.module(dep.request);
     }
     source.replace(dep.range[0], dep.range[1] - 1, content);
   }
 };
 
-module.exports = OpenUI5LazyInstanceDependency;
+export default OpenUI5LazyInstanceDependency;

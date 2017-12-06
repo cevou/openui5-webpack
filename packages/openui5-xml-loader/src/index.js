@@ -1,4 +1,4 @@
-const parseString = require('xml2js').parseString;
+import { parseString } from 'xml2js';
 
 module.exports = function (source) {
   const callback = this.async();
@@ -16,15 +16,15 @@ module.exports = function (source) {
     }
     const viewAttributes = view.$;
     Object.keys(viewAttributes).forEach((key) => {
-      if (key.substr(0, 5) === "xmlns") {
-        namespaces[key.substr(6)] = viewAttributes[key].replace(/\./g, "/");
+      if (key.substr(0, 5) === 'xmlns') {
+        namespaces[key.substr(6)] = viewAttributes[key].replace(/\./g, '/');
       }
     });
     processNodes(view);
-    let requires = "";
+    let requires = '';
     Object.keys(controls).forEach((name) => {
       this.addDependency(name);
-      requires += `"${name}.js": function(){require("${name}")},\n`
+      requires += `"${name}.js": function(){require("${name}")},\n`;
     });
 
     const output = `
@@ -43,17 +43,17 @@ module.exports = function (source) {
 
   function processNodes(node) {
     Object.keys(node).forEach((key) => {
-      if (key === "$") {
+      if (key === '$') {
         return;
       }
-      const identifier = key.split(":");
+      const identifier = key.split(':');
       if (identifier.length === 1) {
-        addControl("", identifier[0])
+        addControl('', identifier[0]);
       } else {
-        addControl(identifier[0], identifier[1])
+        addControl(identifier[0], identifier[1]);
       }
-      node[key].forEach (processNodes);
-    })
+      node[key].forEach(processNodes);
+    });
   }
 
   function addControl(ns, name) {

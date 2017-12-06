@@ -1,7 +1,5 @@
-'use strict';
-
 const NullFactory = require('webpack/lib/NullFactory');
-const LocalModuleDependency = require("webpack/lib/dependencies/LocalModuleDependency");
+const LocalModuleDependency = require('webpack/lib/dependencies/LocalModuleDependency');
 const OpenUI5DefineDependency = require('./OpenUI5DefineDependency');
 const OpenUI5DefineDependencyParserPlugin = require('./OpenUI5DefineDependencyParserPlugin');
 const OpenUI5LazyInstanceDependency = require('./OpenUI5LazyInstanceDependency');
