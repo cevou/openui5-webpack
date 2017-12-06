@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-openui5-remove-support",
   "description": "Remove static support dependencies in UI5",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "Apache-2.0",
   "author": "Christoph Kraemer <chr.kraemer@sap.com>",
   "keywords": [
@@ -22,7 +22,6 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src -d dist"
   },
-  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "cross-env": "^5.1.1"
