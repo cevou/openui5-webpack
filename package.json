@@ -26,8 +26,5 @@
       "prefer-destructuring": 0,
       "no-param-reassign": 0
     }
-  },
-  "engines": {
-    "node": ">=6.0.0"
   }
 }

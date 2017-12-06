@@ -1,4 +1,4 @@
-const OpenUI5Plugin = require('../../../lib/OpenUI5Plugin');
+const OpenUI5Plugin = require('../../../src/OpenUI5Plugin');
 
 module.exports = {
   entry: {

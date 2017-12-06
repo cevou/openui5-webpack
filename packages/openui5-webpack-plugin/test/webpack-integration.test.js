@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const OpenUI5Plugin = require('../lib/OpenUI5Plugin');
+const OpenUI5Plugin = require('../src/OpenUI5Plugin');
 
 const cases = fs.readdirSync(path.join(__dirname, 'cases'));
 describe('Integration TestCases', () => {

@@ -24,7 +24,7 @@
     "build": "cross-env NODE_ENV=production babel src -d dist"
   },
   "engines": {
-    "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    "node": ">= 5.10"
   },
   "dependencies": {
     "xml2js": "^0.4.19"

@@ -22,6 +22,9 @@
     "test": "jest",
     "test:coverage": "jest --collectCoverageFrom='src/**/*.js' --coverage --coverageReporters=html"
   },
+  "engines": {
+    "node": ">= 5.10"
+  },
   "peerDependencies": {
     "webpack": "^2.0.0 || ^3.0.0"
   },

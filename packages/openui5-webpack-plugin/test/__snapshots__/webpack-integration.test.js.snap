@@ -73,7 +73,7 @@ exports[`Integration TestCases define-dep-fcn 1`] = `
 var __WEBPACK_UI5_DEFINE_ARRAY__, __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_UI5_DEFINE_RESULT__ = function() {
   return 'test';
 }.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__),
-				__WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
 
 /***/ }),
@@ -160,7 +160,7 @@ exports[`Integration TestCases define-dep-fcn-exp 1`] = `
 var __WEBPACK_UI5_DEFINE_ARRAY__, __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_UI5_DEFINE_RESULT__ = function() {
   return 'test';
 }.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__),
-				__WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
 
 /***/ }),
@@ -247,7 +247,7 @@ exports[`Integration TestCases define-fcn 1`] = `
 var __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_RESULT__ = function() {
   return 'test';
 }.call(exports, __webpack_require__, exports, module),
-				__WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
 
 /***/ })
@@ -327,7 +327,7 @@ exports[`Integration TestCases define-fcn-exp 1`] = `
 var __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_RESULT__ = function() {
   return 'test';
 }.call(exports, __webpack_require__, exports, module),
-				__WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
 
 /***/ })
@@ -407,7 +407,7 @@ exports[`Integration TestCases define-name-dep-fcn 1`] = `
 var __WEBPACK_UI5_DEFINE_ARRAY__, __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_UI5_DEFINE_RESULT__ = function() {
   return 'test';
 }.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__),
-				__WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
 
 /***/ }),
@@ -494,7 +494,7 @@ exports[`Integration TestCases define-name-dep-fcn-exp 1`] = `
 var __WEBPACK_UI5_DEFINE_ARRAY__, __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_UI5_DEFINE_RESULT__ = function() {
   return 'test';
 }.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__),
-				__WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
 
 /***/ }),
@@ -581,7 +581,7 @@ exports[`Integration TestCases define-name-fcn 1`] = `
 var __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_RESULT__ = function() {
   return 'test';
 }.call(exports, __webpack_require__, exports, module),
-				__WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
 
 /***/ })

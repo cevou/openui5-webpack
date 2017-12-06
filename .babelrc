@@ -5,7 +5,7 @@
       {
         "useBuiltIns": true,
         "targets": {
-          "node": "4.8"
+          "node": "5.10"
         },
         "exclude": [
           "transform-async-to-generator",
@@ -21,15 +21,5 @@
         "useBuiltIns": true
       }
     ]
-  ],
-  "env": {
-    "test": {
-      "presets": [
-        "env"
-      ],
-      "plugins": [
-        "transform-object-rest-spread"
-      ]
-    }
-  }
+  ]
 }

@@ -27,4 +27,4 @@ OpenUI5LazyInstanceDependency.Template = class OpenUI5LazyInstanceDependencyTemp
   }
 };
 
-export default OpenUI5LazyInstanceDependency;
+module.exports = OpenUI5LazyInstanceDependency;
