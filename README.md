@@ -14,6 +14,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/openui5-webpack-plugin"><img src="https://img.shields.io/npm/v/openui5-webpack-plugin.svg?style=flat-square"></a>
   <a href="https://travis-ci.org/cevou/openui5-webpack-plugin"><img src="https://img.shields.io/travis/cevou/openui5-webpack/master.svg?style=flat-square"></a>
+  <a href="https://coveralls.io/github/cevou/openui5-webpack"><img src="https://img.shields.io/coveralls/github/cevou/openui5-webpack.svg?style=flat-square"></a>
 </p>
 
 <h2 align="center">Projects</h2>

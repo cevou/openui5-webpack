@@ -12,3 +12,4 @@ cache:
     - packages/openui5-renderer-loader/node_modules
     - packages/openui5-webpack-plugin/node_modules
     - packages/openui5-xml-loader/node_modules
+after_script: nyc report --reporter=text-lcov | coveralls

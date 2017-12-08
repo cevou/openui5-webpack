@@ -4,7 +4,7 @@
   "scripts": {
     "postinstall": "lerna bootstrap --stream",
     "publish": "npm run build && lerna publish",
-    "test": "lerna run test --stream",
+    "test": "nyc lerna run test",
     "lint": "eslint . --cache",
     "prepublish": "npm run build",
     "build": "lerna run build --stream"
@@ -12,10 +12,12 @@
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "coveralls": "^3.0.0",
     "eslint": "^4.12.1",
     "eslint-config-webpack": "^1.2.5",
     "eslint-plugin-import": "^2.8.0",
-    "lerna": "^2.5.1"
+    "lerna": "^2.5.1",
+    "nyc": "^11.3.0"
   },
   "eslintConfig": {
     "extends": [
@@ -26,5 +28,20 @@
       "prefer-destructuring": 0,
       "no-param-reassign": 0
     }
+  },
+  "nyc": {
+    "exclude": [
+      "**/coverage/**",
+      "**/dist/**",
+      "**/lib/**",
+      "**/html/assets/**",
+      "**/test/**"
+    ],
+    "reporter": [
+      "text",
+      "lcov",
+      "html"
+    ],
+    "all": true
   }
 }

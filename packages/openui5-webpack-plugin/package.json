@@ -19,8 +19,7 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src -d dist",
-    "test": "jest",
-    "test:coverage": "jest --collectCoverageFrom='src/**/*.js' --coverage --coverageReporters=html"
+    "test": "jest --collectCoverageFrom='src/**/*.js' --coverage"
   },
   "engines": {
     "node": ">= 5.10"
