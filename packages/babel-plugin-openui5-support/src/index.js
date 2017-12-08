@@ -62,11 +62,11 @@ export default function ({ types: t }) {
 
     const arg1 = args[0];
     const arg2 = args[1];
-    if (arg1.type !== 'ArrayExpression' && arg2.type !== 'Identifier') {
+    if (arg1.type !== 'ArrayExpression' || arg2.type !== 'Identifier') {
       return;
     }
 
-    if (arg1.elements.length !== 1 && arg1.elements[0].type !== 'Literal') {
+    if (arg1.elements.length !== 1 || arg1.elements[0].type !== 'StringLiteral') {
       return;
     }
 
