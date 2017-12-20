@@ -1,3 +1,4 @@
+const ParserHelpers = require('webpack/lib/ParserHelpers');
 const OpenUI5LazyInstanceDependency = require('./OpenUI5LazyInstanceDependency');
 const OpenUI5RequireItemDependency = require('./OpenUI5RequireItemDependency');
 const OpenUI5RequireContextDependency = require('./OpenUI5RequireContextDependency');
@@ -59,6 +60,7 @@ class OpenUI5RequireDependencyParserPlugin {
         parser.applyPluginsBailResult('call require:openui5:item', expr, param);
         return true;
       }
+      parser.applyPluginsBailResult('call require:openui5:remove', expr, param);
       return false;
     });
 
@@ -101,6 +103,8 @@ class OpenUI5RequireDependencyParserPlugin {
       parser.state.current.addDependency(dep);
       return true;
     });
+
+    parser.plugin('call require:openui5:remove', ParserHelpers.toConstantDependency('console.warn("UI5 tried to dynamically require a module. If it doesn\'t exist in the bundle a error might follow.")'));
 
     parser.plugin('expression require:openui5:global', (expr, request) => {
       const dep = new OpenUI5RequireItemDependency(request, expr.range, true);
