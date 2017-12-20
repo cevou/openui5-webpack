@@ -13,6 +13,14 @@ describe('Integration TestCases', () => {
         entry: {
           build: './index.js',
         },
+        module: {
+          rules: [
+            {
+              test: /\.xml$/,
+              use: 'xml-loader',
+            },
+          ],
+        },
         plugins: [
           new OpenUI5Plugin(),
         ],

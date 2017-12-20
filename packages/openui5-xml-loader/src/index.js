@@ -35,7 +35,9 @@ module.exports = function (source) {
           ${requires}
         }
       });
-      module.exports = ${JSON.stringify(source)}  
+      var parser = new DOMParser();
+      var xml = parser.parseFromString(${JSON.stringify(source)}, "text/xml");
+      module.exports = xml;
     `;
 
     callback(null, output);

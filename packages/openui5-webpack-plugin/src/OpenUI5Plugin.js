@@ -6,6 +6,7 @@ const OpenUI5LazyInstanceDependency = require('./OpenUI5LazyInstanceDependency')
 const OpenUI5RequireDependencyParserPlugin = require('./OpenUI5RequireDependencyParserPlugin');
 const OpenUI5RequireItemDependency = require('./OpenUI5RequireItemDependency');
 const OpenUI5RequireContextDependency = require('./OpenUI5RequireContextDependency');
+const OpenUIResourceDependencyParserPlugin = require('./OpenUI5ResourceDependencyParserPlugin');
 
 class OpenUI5Plugin {
   constructor(options) {
@@ -37,6 +38,7 @@ class OpenUI5Plugin {
         parser.apply(
           new OpenUI5RequireDependencyParserPlugin(options),
           new OpenUI5DefineDependencyParserPlugin(options),
+          new OpenUIResourceDependencyParserPlugin(options),
         );
       });
     });
