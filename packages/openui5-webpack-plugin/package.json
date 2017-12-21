@@ -24,6 +24,11 @@
   "engines": {
     "node": ">= 5.10"
   },
+  "dependencies": {
+    "async": "^2.6.0",
+    "tapable": "^0.2.8",
+    "webpack-sources": "^1.1.0"
+  },
   "peerDependencies": {
     "webpack": "^2.0.0 || ^3.0.0"
   },

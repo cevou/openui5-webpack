@@ -6,7 +6,9 @@ const OpenUI5LazyInstanceDependency = require('./OpenUI5LazyInstanceDependency')
 const OpenUI5RequireDependencyParserPlugin = require('./OpenUI5RequireDependencyParserPlugin');
 const OpenUI5RequireItemDependency = require('./OpenUI5RequireItemDependency');
 const OpenUI5RequireContextDependency = require('./OpenUI5RequireContextDependency');
-const OpenUIResourceDependencyParserPlugin = require('./OpenUI5ResourceDependencyParserPlugin');
+const OpenUI5ResourceDependencyParserPlugin = require('./OpenUI5ResourceDependencyParserPlugin');
+const OpenUI5ResourceDependency = require('./OpenUI5ResourceDependency');
+const OpenUI5ResourceModuleFactory = require('./OpenUI5ResourceModuleFactory');
 
 class OpenUI5Plugin {
   constructor(options) {
@@ -15,6 +17,9 @@ class OpenUI5Plugin {
 
   apply(compiler) {
     const { options } = this;
+
+    const resourceModuleFactory = new OpenUI5ResourceModuleFactory(compiler.resolvers);
+    compiler.applyPlugins('openui5-resource-module-factory', resourceModuleFactory);
 
     compiler.plugin('compilation', (compilation, params) => {
       const { normalModuleFactory, contextModuleFactory } = params;
@@ -31,6 +36,9 @@ class OpenUI5Plugin {
       compilation.dependencyFactories.set(OpenUI5LazyInstanceDependency, normalModuleFactory);
       compilation.dependencyTemplates.set(OpenUI5LazyInstanceDependency, new OpenUI5LazyInstanceDependency.Template());
 
+      compilation.dependencyFactories.set(OpenUI5ResourceDependency, resourceModuleFactory);
+      compilation.dependencyTemplates.set(OpenUI5ResourceDependency, new OpenUI5ResourceDependency.Template());
+
       compilation.dependencyFactories.set(LocalModuleDependency, new NullFactory());
       compilation.dependencyTemplates.set(LocalModuleDependency, new LocalModuleDependency.Template());
 
@@ -38,7 +46,7 @@ class OpenUI5Plugin {
         parser.apply(
           new OpenUI5RequireDependencyParserPlugin(options),
           new OpenUI5DefineDependencyParserPlugin(options),
-          new OpenUIResourceDependencyParserPlugin(options),
+          new OpenUI5ResourceDependencyParserPlugin(options),
         );
       });
     });

@@ -1,4 +1,4 @@
-const OpenUI5RequireContextDependency = require('./OpenUI5RequireContextDependency');
+const OpenUI5ResourceDependency = require('./OpenUI5ResourceDependency');
 
 class OpenUI5ResourceDependencyParserPlugin {
   constructor(options) {
@@ -9,8 +9,11 @@ class OpenUI5ResourceDependencyParserPlugin {
     const options = this.options || {};
 
     parser.plugin('call jQuery.sap.loadResource', (expr) => {
-      const context = options.resourceContext || '.';
-      const regExp = options.resourceRegExp || /^.*\.(xml|properties)$/;
+      const modulePath = options.modulePath || '';
+      const resources = options.resources || {};
+      const extensions = resources.extensions || ['properties', 'xml'];
+      const translations = options.translations || [];
+      const libraries = options.libs || [];
       const arg = expr.arguments[0];
 
       let param;
@@ -31,22 +34,16 @@ class OpenUI5ResourceDependencyParserPlugin {
         param = parser.evaluateExpression(arg);
       }
 
-      const dep = new OpenUI5RequireContextDependency(context, true, regExp, expr.range, param.range);
+      const dep = new OpenUI5ResourceDependency(
+        parser.state.options.context,
+        modulePath,
+        extensions,
+        libraries,
+        translations,
+        expr.range,
+        param.range,
+      );
       dep.loc = expr.loc;
-      dep.critical = options.wrappedContextCritical && 'a part of the request of a dependency is an expression';
-      dep.optional = !!parser.scope.inTry;
-      if (options.modulePath) {
-        dep.replaces = [
-          {
-            range: [param.range[0], param.range[0]],
-            value: '(',
-          },
-          {
-            range: [param.range[1], param.range[1]],
-            value: `).replace(/^(?:\\.\\/)?${options.modulePath.replace(/\//g, '\\/')}/,".")`,
-          },
-        ];
-      }
       parser.state.current.addDependency(dep);
       return true;
     });

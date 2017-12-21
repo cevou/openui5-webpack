@@ -34,7 +34,7 @@ describe('Integration TestCases', () => {
         options = require(configFile);
       }
 
-      options.context = testDirectory;
+      if (!options.context) options.context = testDirectory;
       if (!options.output) options.output = { filename: '[name].js' };
       if (!options.output.path) options.output.path = outputDirectory;
 

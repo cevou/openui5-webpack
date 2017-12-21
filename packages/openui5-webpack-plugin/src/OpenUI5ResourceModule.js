@@ -1,0 +1,196 @@
+const path = require('path');
+const async = require('async');
+const Module = require('webpack/lib/Module');
+const ContextElementDependency = require('webpack/lib/dependencies/ContextElementDependency');
+const OriginalSource = require('webpack-sources').OriginalSource;
+const RawSource = require('webpack-sources').RawSource;
+
+class OpenUI5ResourceModule extends Module {
+  constructor(context, modulePath, extensions, resources) {
+    super();
+    this.context = context;
+    this.modulePath = modulePath;
+    this.extensions = extensions;
+    this.resources = resources;
+  }
+
+  identifier() {
+    return this.context;
+  }
+
+  readableIdentifier(requestShortener) {
+    return `${requestShortener.shorten(this.context)} openui5 resources`;
+  }
+
+  build(options, compilation, resolver, fs, callback) {
+    this.built = true;
+    this.buildTime = Date.now();
+
+    // this.dependencies = [];
+    // this.blocks = [];
+
+    this.dependencies = this.resources.map((resource) => {
+      const dep = new ContextElementDependency(resource, `./${resource}`);
+      dep.optional = true;
+      dep.modulePath = this.modulePath;
+      dep.loc = dep.userRequest;
+      dep.weak = true;
+      return dep;
+    });
+
+    this.collectDependencies(fs, this.context, this.libraries, this.extensions, (err, dependencies) => {
+      if (err) return callback(err);
+
+      if (!dependencies) {
+        return callback();
+      }
+
+      // enhance dependencies with meta info
+      dependencies.forEach((dep) => {
+        dep.modulePath = this.modulePath;
+        dep.loc = dep.userRequest;
+        dep.weak = true;
+      });
+
+      this.dependencies = this.dependencies.concat(dependencies);
+
+      return callback();
+    });
+  }
+
+  getUserRequestMap(dependencies) {
+    // if we filter first we get a new array
+    // therefor we dont need to create a clone of dependencies explicitly
+    // therefore the order of this is !important!
+    return dependencies
+      .filter(dependency => dependency.module)
+      .sort((a, b) => {
+        if (a.userRequest === b.userRequest) {
+          return 0;
+        }
+        return a.userRequest < b.userRequest ? -1 : 1;
+      }).reduce((map, dep) => {
+        map[dep.userRequest] = dep.module.id;
+        return map;
+      }, Object.create(null));
+  }
+
+  getWeakSyncSource(dependencies, id) {
+    const map = this.getUserRequestMap(dependencies);
+    return `var map = ${JSON.stringify(map, null, '\t')};
+function webpackContext(req) {
+  var id = webpackContextResolve(req);
+  if(!__webpack_require__.m[id])
+    throw new Error("Module '" + req + "' ('" + id + "') is not available (weak dependency)");
+  return __webpack_require__(id);
+};
+function webpackContextResolve(req) {
+  var id = map[req];
+  if(!(id + 1)) // check for number or string
+    throw new Error("Cannot find module '" + req + "'.");
+  return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+  return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+webpackContext.id = ${JSON.stringify(id)};
+module.exports = webpackContext;`;
+  }
+
+  getSourceForEmptyContext(id) {
+    return `function webpackEmptyContext(req) {
+  throw new Error("Cannot find module '" + req + "'.");
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = ${JSON.stringify(id)};`;
+  }
+
+  getSourceString(asyncMode, outputOptions, requestShortener) {
+    // if(this.blocks && this.blocks.length > 0) {
+    //   return this.getLazySource(this.blocks, this.id);
+    // }
+    // return this.getSourceForEmptyAsyncContext(this.id);
+    if (this.dependencies && this.dependencies.length > 0) {
+      return this.getWeakSyncSource(this.dependencies, this.id);
+    }
+    return this.getSourceForEmptyContext(this.id);
+  }
+
+  getSource(sourceString) {
+    if (this.useSourceMap) {
+      return new OriginalSource(sourceString, this.identifier());
+    }
+    return new RawSource(sourceString);
+  }
+
+  source(dependencyTemplates, outputOptions, requestShortener) {
+    return this.getSource(this.getSourceString(outputOptions, requestShortener));
+  }
+
+  size() {
+    // TODO update
+    // base penalty
+    const initialSize = 160;
+
+    // if we dont have dependencies we stop here.
+    return this.dependencies.reduce((size, dependency) => size + 5 + dependency.userRequest.length, initialSize);
+  }
+
+  collectDependencies(fs, context, libraries, extensions, callback) {
+    const addDirectory = (directory, callback) => {
+      fs.readdir(directory, (err, files) => {
+        if (err) {
+          callback(err);
+          return;
+        }
+        async.map(files.filter(p => p.indexOf('.') !== 0), (segment, callback) => {
+          const subResource = path.join(directory, segment);
+
+          fs.stat(subResource, (err, stat) => {
+            if (err) {
+              if (err.code === 'ENOENT') {
+                // ENOENT is ok here because the file may have been deleted between
+                // the readdir and stat calls.
+                callback();
+                return;
+              }
+              callback(err);
+              return;
+            }
+            if (stat.isDirectory()) {
+              addDirectory(subResource, callback);
+            } else if (stat.isFile() && extensions.includes(path.extname(subResource).substr(1))) {
+              const obj = {
+                context,
+                request: `.${subResource.substr(context.length).replace(/\\/g, '/')}`,
+              };
+              const dep = new ContextElementDependency(obj.request);
+              dep.optional = true;
+              callback(null, dep);
+            } else {
+              callback();
+            }
+          });
+        }, (err, result) => {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          if (!result) {
+            callback(null, []);
+            return;
+          }
+
+          callback(null, result.filter(i => !!i).reduce((a, i) => a.concat(i), []));
+        });
+      });
+    };
+    addDirectory(context, callback);
+  }
+}
+
+module.exports = OpenUI5ResourceModule;
