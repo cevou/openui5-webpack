@@ -26,9 +26,6 @@ class OpenUI5ResourceModule extends Module {
     this.built = true;
     this.buildTime = Date.now();
 
-    // this.dependencies = [];
-    // this.blocks = [];
-
     this.dependencies = this.resources.map((resource) => {
       const userRequest = resource.indexOf('cldr') > -1 ? resource : `./${resource}`;
       const dep = new ContextElementDependency(resource, userRequest);
@@ -79,24 +76,31 @@ class OpenUI5ResourceModule extends Module {
   getWeakSyncSource(dependencies, id) {
     const map = this.getUserRequestMap(dependencies);
     return `var map = ${JSON.stringify(map, null, '\t')};
-function webpackContext(req) {
-  var id = webpackContextResolve(req);
+function openui5Resource(req, failOnError) {
+  var id = openui5ResourceResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
   if(!__webpack_require__.m[id])
     throw new Error("Module '" + req + "' ('" + id + "') is not available (weak dependency)");
   return __webpack_require__(id);
 };
-function webpackContextResolve(req) {
+function openui5ResourceResolve(req, failOnError) {
   var id = map[req];
-  if(!(id + 1)) // check for number or string
-    throw new Error("Cannot find module '" + req + "'.");
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error("Cannot find module '" + req + "'.");
+    }
+    return null;
+  }  
   return id;
 };
-webpackContext.keys = function webpackContextKeys() {
+openui5Resource.keys = function openui5ResourceKeys() {
   return Object.keys(map);
 };
-webpackContext.resolve = webpackContextResolve;
-webpackContext.id = ${JSON.stringify(id)};
-module.exports = webpackContext;`;
+openui5Resource.resolve = openui5ResourceResolve;
+openui5Resource.id = ${JSON.stringify(id)};
+module.exports = openui5Resource;`;
   }
 
   getSourceForEmptyContext(id) {
@@ -109,11 +113,7 @@ module.exports = webpackEmptyContext;
 webpackEmptyContext.id = ${JSON.stringify(id)};`;
   }
 
-  getSourceString(asyncMode, outputOptions, requestShortener) {
-    // if(this.blocks && this.blocks.length > 0) {
-    //   return this.getLazySource(this.blocks, this.id);
-    // }
-    // return this.getSourceForEmptyAsyncContext(this.id);
+  getSourceString() {
     if (this.dependencies && this.dependencies.length > 0) {
       return this.getWeakSyncSource(this.dependencies, this.id);
     }

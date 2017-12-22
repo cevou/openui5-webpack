@@ -17,6 +17,7 @@ class OpenUI5ResourceDependencyParserPlugin {
       const arg = expr.arguments[0];
 
       let param;
+      let foe;
       if (arg.type === 'ObjectExpression') {
         const property = arg.properties.find((prop) => {
           if (prop.key && prop.key.type === 'Identifier' && prop.key.name === 'url') {
@@ -29,7 +30,17 @@ class OpenUI5ResourceDependencyParserPlugin {
           throw new Error('Property url missing in object for jQuery.sap.loadResource');
         }
 
+        const failOnError = arg.properties.find((prop) => {
+          if (prop.key && prop.key.type === 'Identifier' && prop.key.name === 'failOnError') {
+            return true;
+          }
+          return false;
+        });
+
         param = parser.evaluateExpression(property.value);
+        if (failOnError) {
+          foe = parser.evaluateExpression(failOnError.value);
+        }
       } else {
         param = parser.evaluateExpression(arg);
       }
@@ -40,6 +51,7 @@ class OpenUI5ResourceDependencyParserPlugin {
         extensions,
         libraries,
         translations,
+        foe ? foe.bool : true,
         expr.range,
         param.range,
       );

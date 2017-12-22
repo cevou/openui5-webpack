@@ -18,12 +18,14 @@ class OpenUI5ResourceModuleFactory extends Tapable {
       extensions: dependency.extensions,
       libraries: dependency.libraries,
       translations: dependency.translations,
+      failOnError: dependency.failOnError,
     }, (err, result) => {
       const context = result.context;
       const modulePath = result.modulePath;
       const extensions = result.extensions;
       const libraries = result.libraries;
       const translations = result.translations;
+      const failOnError = result.failOnError;
       const resolvers = this.resolvers;
 
       const messagebundles = ['messagebundle.properties'];
@@ -62,6 +64,7 @@ class OpenUI5ResourceModuleFactory extends Tapable {
           modulePath,
           extensions,
           resources: result,
+          failOnError,
         }, (err, result) => {
           if (err) return callback(err);
 
@@ -73,6 +76,7 @@ class OpenUI5ResourceModuleFactory extends Tapable {
             result.modulePath,
             result.extensions,
             result.resources,
+            result.failOnError,
           ));
         });
       });
