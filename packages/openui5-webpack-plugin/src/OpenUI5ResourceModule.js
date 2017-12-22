@@ -30,7 +30,8 @@ class OpenUI5ResourceModule extends Module {
     // this.blocks = [];
 
     this.dependencies = this.resources.map((resource) => {
-      const dep = new ContextElementDependency(resource, `./${resource}`);
+      const userRequest = resource.indexOf('cldr') > -1 ? resource : `./${resource}`;
+      const dep = new ContextElementDependency(resource, userRequest);
       dep.optional = true;
       dep.modulePath = this.modulePath;
       dep.loc = dep.userRequest;

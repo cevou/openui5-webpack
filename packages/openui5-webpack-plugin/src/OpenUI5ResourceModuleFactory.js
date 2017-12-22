@@ -39,9 +39,12 @@ class OpenUI5ResourceModuleFactory extends Tapable {
           resources.push(`${libSlash}/${messagebundle}`);
         });
       });
+      translations.forEach((translation) => {
+        resources.push(`sap/ui/core/cldr/${translation}.json`);
+      });
 
       async.map(resources, (resource, callback) => {
-        resolvers.normal.resolve({}, dependency.context, resource, (err, result) => {
+        resolvers.normal.resolve({}, dependency.context, resource, (err) => {
           if (err) {
             callback(err);
             return;
