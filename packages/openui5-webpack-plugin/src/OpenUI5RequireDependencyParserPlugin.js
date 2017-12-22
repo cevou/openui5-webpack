@@ -104,7 +104,7 @@ class OpenUI5RequireDependencyParserPlugin {
       return true;
     });
 
-    parser.plugin('call require:openui5:remove', ParserHelpers.toConstantDependency('console.warn("UI5 tried to dynamically require a module. If it doesn\'t exist in the bundle a error might follow.")'));
+    parser.plugin('call require:openui5:remove', ParserHelpers.toConstantDependency(process.env.NODE_ENV === 'production' ? '' : 'console.warn("UI5 tried to dynamically require a module. If it doesn\'t exist in the bundle a error might follow.")'));
 
     parser.plugin('expression require:openui5:global', (expr, request) => {
       const dep = new OpenUI5RequireItemDependency(request, expr.range, true);
