@@ -25,7 +25,11 @@ const OpenUI5Plugin = require("openui5-webpack-plugin");
 
 module.exports = {
   plugins: [
-    new OpenUI5Plugin(),
+    new OpenUI5Plugin({
+      modulePath: 'my/resource/module/path',
+      libs: ['sap.ui.core', 'sap.m'],
+      translations: ['en', 'de']
+    }),
   ]
 }
 ```
@@ -34,59 +38,14 @@ This enables webpack to understand the OpenUI5 module syntax. Depending on where
 you store the OpenUI5 sources you have to extend this configuration, so webpack
 can resolve the module paths.
 
-If you use the packages published via Bower this would look like this:
-
-```js
-const OpenUI5Plugin = require("openui5-webpack-plugin");
-
-module.exports = {
-  resolve: {
-    "modules": [
-      "bower_components/openui5-sap.ui.core/resources",
-      //workaround for signals dependency in hasher
-      "bower_components/openui5-sap.ui.core/resources/sap/ui/thirdparty",
-      "bower_components/openui5-sap.m/resources",
-      "node_modules"
-    ]
-  },
-  plugins: [
-    new OpenUI5Plugin(),
-  ]
-}
-```
-
 By default, OpenUI5 does not have a static dependency from controls to their renderer.
 We need to add this dependency using the `openui5-renderer-loader` during the build.
-
-```js
-const OpenUI5Plugin = require("openui5-webpack-plugin");
-
-module.exports = {
-  resolve: {
-    "modules": [
-      "bower_components/openui5-sap.ui.core/resources",
-      "bower_components/openui5-sap.ui.core/resources/sap/ui/thirdparty",
-      "bower_components/openui5-sap.m/resources",
-      "node_modules"
-    ]
-  },
-  module: {
-    rules: [
-      {
-        test: /bower_components[/\\]openui5-sap.*\.js$/,
-        use: 'openui5-renderer-loader'
-      },
-    ],
-  },
-  plugins: [
-    new OpenUI5Plugin(),
-  ]
-}
-```
 
 Additionally OpenUI5 assumes that some modules (`jQuery`) are available in the global space.
 Therefore you need to load them using the `script-loader`. Also some of the OpenUI5
 modules do not export their module by default. We need to fix this using the `exports-loader`.
+
+If you use the packages published via Bower this would look like this:
 
 ```js
 const OpenUI5Plugin = require("openui5-webpack-plugin");
@@ -127,7 +86,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new OpenUI5Plugin(),
+    new OpenUI5Plugin({
+      modulePath: 'my/resource/module/path',
+      libs: ['sap.ui.core', 'sap.m'],
+      translations: ['en', 'de']
+    }),
   ]
 }
 ```
