@@ -24,11 +24,17 @@ module.exports = function (source) {
     let requires = '';
     Object.keys(controls).forEach((name) => {
       this.addDependency(name);
-      requires += `jQuery.sap.setObject("${name.replace(/\//g, '.')}", require("${name}"));\n`;
+      requires += `"${name}.js": function(){require("${name}")},\n`;
     });
 
     const output = `
-      ${requires}
+      jQuery.sap.registerPreloadedModules({
+        version: "2.0",
+        url: '.',
+        modules: {
+          ${requires}
+        }
+      });
       var parser = new DOMParser();
       var xml = parser.parseFromString(${JSON.stringify(source)}, "text/xml");
       module.exports = xml;
