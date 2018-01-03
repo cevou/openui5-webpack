@@ -22,9 +22,11 @@ module.exports = function (source) {
     });
     processNodes(view);
     let requires = '';
+    let objects = '';
     Object.keys(controls).forEach((name) => {
       this.addDependency(name);
       requires += `"${name}.js": function(){require("${name}")},\n`;
+      objects += `jQuery.sap.setObject("${name.replace(/\//g, '.')}", require("${name}"));\n`;
     });
 
     const output = `
@@ -35,6 +37,7 @@ module.exports = function (source) {
           ${requires}
         }
       });
+      ${objects}
       var parser = new DOMParser();
       var xml = parser.parseFromString(${JSON.stringify(source)}, "text/xml");
       module.exports = xml;
