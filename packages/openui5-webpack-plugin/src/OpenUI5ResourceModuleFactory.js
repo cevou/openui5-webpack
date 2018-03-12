@@ -18,6 +18,7 @@ class OpenUI5ResourceModuleFactory extends Tapable {
       extensions: dependency.extensions,
       libraries: dependency.libraries,
       translations: dependency.translations,
+      locales: dependency.locales ? dependency.locales : dependency.translations,
       failOnError: dependency.failOnError,
     }, (err, result) => {
       const context = result.context;
@@ -25,6 +26,7 @@ class OpenUI5ResourceModuleFactory extends Tapable {
       const extensions = result.extensions;
       const libraries = result.libraries;
       const translations = result.translations;
+      const locales = result.locales;
       const failOnError = result.failOnError;
       const resolvers = this.resolvers;
 
@@ -41,7 +43,7 @@ class OpenUI5ResourceModuleFactory extends Tapable {
           resources.push(`${libSlash}/${messagebundle}`);
         });
       });
-      translations.forEach((translation) => {
+      locales.forEach((translation) => {
         resources.push(`sap/ui/core/cldr/${translation}.json`);
       });
 
