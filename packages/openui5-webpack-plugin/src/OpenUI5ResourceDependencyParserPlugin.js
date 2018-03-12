@@ -8,7 +8,7 @@ class OpenUI5ResourceDependencyParserPlugin {
   apply(parser) {
     const options = this.options || {};
 
-    parser.plugin('call jQuery.sap.loadResource', (expr) => {
+    parser.hooks.call.for('jQuery.sap.loadResource').tap('OpenUI5Plugin', (expr) => {
       const modulePath = options.modulePath || '';
       const resources = options.resources || {};
       const extensions = resources.extensions || ['properties', 'xml'];

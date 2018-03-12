@@ -6,37 +6,37 @@ const OriginalSource = require('webpack-sources').OriginalSource;
 const RawSource = require('webpack-sources').RawSource;
 
 class OpenUI5ResourceModule extends Module {
-  constructor(context, modulePath, extensions, resources) {
-    super();
-    this.context = context;
-    this.modulePath = modulePath;
-    this.extensions = extensions;
-    this.resources = resources;
+  constructor(options) {
+    super('javascript/dynamic', options.context);
+    this.options = options;
   }
 
   identifier() {
-    return this.context;
+    return this.options.context;
   }
 
   readableIdentifier(requestShortener) {
-    return `${requestShortener.shorten(this.context)} openui5 resources`;
+    return `${requestShortener.shorten(this.options.context)} openui5 resources`;
   }
 
   build(options, compilation, resolver, fs, callback) {
     this.built = true;
-    this.buildTime = Date.now();
+    this.buildMeta = {};
+    this.buildInfo = {
+      builtTime: Date.now(),
+    };
 
-    this.dependencies = this.resources.map((resource) => {
+    this.dependencies = this.options.resources.map((resource) => {
       const userRequest = resource.indexOf('cldr') > -1 ? resource : `./${resource}`;
       const dep = new ContextElementDependency(resource, userRequest);
       dep.optional = true;
-      dep.modulePath = this.modulePath;
+      dep.modulePath = this.options.modulePath;
       dep.loc = dep.userRequest;
       dep.weak = true;
       return dep;
     });
 
-    this.collectDependencies(fs, this.context, this.libraries, this.extensions, (err, dependencies) => {
+    this.collectDependencies(fs, this.options, (err, dependencies) => {
       if (err) return callback(err);
 
       if (!dependencies) {
@@ -44,11 +44,11 @@ class OpenUI5ResourceModule extends Module {
       }
 
       // enhance dependencies with meta info
-      dependencies.forEach((dep) => {
-        dep.modulePath = this.modulePath;
+      for (const dep of dependencies) {
+        dep.modulePath = this.options.modulePath;
         dep.loc = dep.userRequest;
         dep.weak = true;
-      });
+      }
 
       this.dependencies = this.dependencies.concat(dependencies);
 
@@ -140,7 +140,9 @@ webpackEmptyContext.id = ${JSON.stringify(id)};`;
     return this.dependencies.reduce((size, dependency) => size + 5 + dependency.userRequest.length, initialSize);
   }
 
-  collectDependencies(fs, context, libraries, extensions, callback) {
+  collectDependencies(fs, options, callback) {
+    const context = options.context;
+    const extensions = options.extensions;
     const addDirectory = (directory, callback) => {
       fs.readdir(directory, (err, files) => {
         if (err) {

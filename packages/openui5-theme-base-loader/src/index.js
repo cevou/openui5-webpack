@@ -1,8 +1,20 @@
 const path = require('path');
+const loaderUtils = require('loader-utils');
 
 module.exports = function (source) {
+  const defaultOptions = {
+    theme: 'sap_belize',
+    modules: ['node_modules'],
+  };
+
+  const options = Object.assign(
+    {},
+    defaultOptions,
+    loaderUtils.getOptions(this),
+  );
+
   const callback = this.async();
-  const modules = this.options.resolve.modules;
+  const modules = options.modules;
   const ext = path.extname(this.resourcePath);
   const name = this.resourcePath.replace(ext, '');
   const info = name.match(/^(.*)[/\\]themes[/\\]([^/\\]*)[/\\](.*)$/);

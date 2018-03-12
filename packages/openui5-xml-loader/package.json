@@ -34,6 +34,6 @@
     "cross-env": "^5.1.4"
   },
   "peerDependencies": {
-    "openui5-webpack-plugin": "^0.1.0"
+    "openui5-webpack-plugin": "^0.2.0"
   }
 }

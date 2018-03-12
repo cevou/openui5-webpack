@@ -31,4 +31,5 @@ module.exports = {
       translations: ['en']
     }),
   ],
+  mode: 'production'
 };

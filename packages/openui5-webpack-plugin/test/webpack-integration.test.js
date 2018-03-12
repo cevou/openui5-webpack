@@ -24,6 +24,7 @@ describe('Integration TestCases', () => {
         plugins: [
           new OpenUI5Plugin(),
         ],
+        mode: 'production'
       };
 
       const testDirectory = path.join(__dirname, 'cases', testCase);

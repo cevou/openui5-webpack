@@ -19,4 +19,5 @@ module.exports = {
       modulePath: "sap/ui/test",
     }),
   ],
+  mode: 'production'
 };

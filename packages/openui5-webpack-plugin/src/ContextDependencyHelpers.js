@@ -9,7 +9,7 @@ function quotemeta(str) {
   return str.replace(/[-[\]\\/{}()*+?.^$|]/g, '\\$&');
 }
 
-ContextDependencyHelpers.create = function (Dep, range, param, expr, options, chunkName) {
+ContextDependencyHelpers.create = function (Dep, range, param, expr, options, contextOptions) {
   if (param.isWrapped() && (param.prefix && param.prefix.isString())) {
     let prefix = param.prefix.string;
     const prefixRange = param.prefix.range;
@@ -21,7 +21,12 @@ ContextDependencyHelpers.create = function (Dep, range, param, expr, options, ch
       prefix = `.${prefix.substr(idx)}`;
     }
     const regExp = new RegExp(`^${quotemeta(prefix)}.*$`);
-    const dep = new Dep(context, options.wrappedContextRecursive, regExp, range, valueRange, chunkName);
+    const dep = new Dep(Object.assign({
+      request: context,
+      recursive: options.wrappedContextRecursive,
+      regExp,
+      mode: 'sync',
+    }, contextOptions), range, valueRange);
     dep.loc = expr.loc;
     dep.prepend = param.prefix && param.prefix.isString() ? prefix : null;
     dep.critical = options.wrappedContextCritical && 'a part of the request of a dependency is an expression';

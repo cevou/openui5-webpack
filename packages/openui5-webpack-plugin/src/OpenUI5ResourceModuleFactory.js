@@ -1,18 +1,24 @@
 const async = require('async');
-const Tapable = require('tapable');
+const Tapable = require('tapable').Tapable;
+const AsyncSeriesWaterfallHook = require('tapable').AsyncSeriesWaterfallHook;
 const OpenUI5ResourceModule = require('./OpenUI5ResourceModule');
 
 class OpenUI5ResourceModuleFactory extends Tapable {
-  constructor(resolvers) {
+  constructor(resolverFactory) {
     super();
-    this.resolvers = resolvers;
+    this.hooks = {
+      beforeResolve: new AsyncSeriesWaterfallHook(['data']),
+      afterResolve: new AsyncSeriesWaterfallHook(['data']),
+    };
+    this.resolverFactory = resolverFactory;
   }
 
   create(data, callback) {
     const dependencies = data.dependencies;
     const dependency = dependencies[0];
+    const resolveOptions = data.resolveOptions;
 
-    this.applyPluginsAsyncWaterfall('before-resolve', {
+    this.hooks.beforeResolve.callAsync({
       context: dependency.context,
       modulePath: dependency.modulePath,
       extensions: dependency.extensions,
@@ -28,13 +34,11 @@ class OpenUI5ResourceModuleFactory extends Tapable {
       const translations = result.translations;
       const locales = result.locales;
       const failOnError = result.failOnError;
-      const resolvers = this.resolvers;
 
       const messagebundles = ['messagebundle.properties'];
       translations.forEach((translation) => {
         messagebundles.push(`messagebundle_${translation}.properties`);
       });
-
 
       const resources = [];
       libraries.forEach((library) => {
@@ -47,8 +51,10 @@ class OpenUI5ResourceModuleFactory extends Tapable {
         resources.push(`sap/ui/core/cldr/${translation}.json`);
       });
 
+      const normalResolver = this.resolverFactory.get('normal', resolveOptions || {});
+
       async.map(resources, (resource, callback) => {
-        resolvers.normal.resolve({}, dependency.context, resource, (err) => {
+        normalResolver.resolve({}, dependency.context, resource, {}, (err) => {
           if (err) {
             callback(err);
             return;
@@ -61,7 +67,7 @@ class OpenUI5ResourceModuleFactory extends Tapable {
           return;
         }
 
-        this.applyPluginsAsyncWaterfall('after-resolve', {
+        this.hooks.afterResolve.callAsync({
           context,
           modulePath,
           extensions,
@@ -73,13 +79,7 @@ class OpenUI5ResourceModuleFactory extends Tapable {
           // Ignored
           if (!result) return callback();
 
-          return callback(null, new OpenUI5ResourceModule(
-            result.context,
-            result.modulePath,
-            result.extensions,
-            result.resources,
-            result.failOnError,
-          ));
+          return callback(null, new OpenUI5ResourceModule(result));
         });
       });
     });

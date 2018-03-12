@@ -14,16 +14,8 @@ class OpenUI5ResourceDependency extends Dependency {
     this.valueRange = valueRange;
   }
 
-  isEqualResource(other) {
-    if (!(other instanceof OpenUI5ResourceDependency)) {
-      return false;
-    }
-
-    return this.context === other.context
-      && this.modulePath === other.modulePath
-      && this.extensions === other.extensions
-      && this.libraries === other.libraries
-      && this.translations === other.translations;
+  getResourceIdentifier() {
+    return `openui5resource${this.context} ${this.modulePath}`;
   }
 
   get type() {

@@ -28,6 +28,7 @@ describe('Integration TestCases', () => {
             },
           ],
         },
+        mode: 'production'
       };
 
       const testDirectory = path.join(__dirname, 'cases', testCase);

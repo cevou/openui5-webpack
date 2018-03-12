@@ -20,67 +20,7 @@ class OpenUI5RequireDependencyParserPlugin {
       'sap.ui.unified.DateRange': 'sap/ui/unified/DateRange',
     };
 
-    parser.plugin('call sap.ui.require', (expr) => {
-      const param = parser.evaluateExpression(expr.arguments[0]);
-      if (expr.arguments[0].type === 'Literal') {
-        parser.applyPluginsBailResult('call require:openui5:item', expr, param);
-        return true;
-      } else if (expr.arguments[0].type === 'ArrayExpression') {
-        parser.applyPluginsBailResult('call require:openui5:array', expr, param);
-        return true;
-      }
-      return false;
-    });
-
-    parser.plugin('call sap.ui.requireSync', (expr) => {
-      const param = parser.evaluateExpression(expr.arguments[0]);
-
-      let result = parser.applyPluginsBailResult('call require:openui5:item', expr, param);
-      if (!result) {
-        result = parser.applyPluginsBailResult('call require:openui5:context', expr, param);
-      }
-      return result;
-    });
-
-    parser.plugin('call lazyInstanceof', (expr) => {
-      const param1 = parser.evaluateExpression(expr.arguments[1]);
-      if (param1.string !== 'sap/ui/app/Application') {
-        const dep = new OpenUI5LazyInstanceDependency(param1.string, expr.arguments[0].name, expr.range);
-        dep.loc = expr.loc;
-        dep.optional = !!parser.scope.inTry;
-        parser.state.current.addDependency(dep);
-        return true;
-      }
-      return false;
-    });
-
-    parser.plugin('call jQuery.sap.require', (expr) => {
-      const param = parser.evaluateExpression(expr.arguments[0]);
-      if (expr.arguments[0].type === 'Literal') {
-        parser.applyPluginsBailResult('call require:openui5:item', expr, param);
-        return true;
-      }
-      parser.applyPluginsBailResult('call require:openui5:remove', expr, param);
-      return false;
-    });
-
-    parser.plugin('call $.sap.require', (expr) => {
-      const param = parser.evaluateExpression(expr.arguments[0]);
-      if (expr.arguments[0].type === 'Literal') {
-        parser.applyPluginsBailResult('call require:openui5:item', expr, param);
-        return true;
-      }
-      return false;
-    });
-
-    parser.plugin('call require:openui5:array', (expr, param) => {
-      param.items.forEach((param) => {
-        parser.applyPluginsBailResult('call require:openui5:item', expr, param);
-      });
-      return true;
-    });
-
-    parser.plugin('call require:openui5:item', (expr, param) => {
+    const processItem = (expr, param) => {
       if (param.isString()) {
         let item = param.string;
         if (item.substr(0, 10) !== 'jquery.sap' && item.substr(0, 2) !== './') {
@@ -93,29 +33,89 @@ class OpenUI5RequireDependencyParserPlugin {
         return true;
       }
       return false;
-    });
+    };
 
-    parser.plugin('call require:openui5:context', (expr, param) => {
+    const processContext = (expr, param) => {
       const dep = ContextDependencyHelpers.create(OpenUI5RequireContextDependency, expr.range, param, expr, options);
       if (!dep) return false;
       dep.loc = expr.loc;
       dep.optional = !!parser.scope.inTry;
       parser.state.current.addDependency(dep);
       return true;
-    });
+    };
 
-    parser.plugin('call require:openui5:remove', ParserHelpers.toConstantDependency(process.env.NODE_ENV === 'production' ? '' : 'console.warn("UI5 tried to dynamically require a module. If it doesn\'t exist in the bundle a error might follow.")'));
+    const processArray = (expr, param) => {
+      param.items.forEach((param) => {
+        processItem(expr, param);
+      });
+      return true;
+    };
 
-    parser.plugin('expression require:openui5:global', (expr, request) => {
+    const processGlobal = (expr, request) => {
       const dep = new OpenUI5RequireItemDependency(request, expr.range, true);
       dep.loc = expr.loc;
       dep.optional = !!parser.scope.inTry;
       parser.state.current.addDependency(dep);
       return true;
+    };
+
+    const processRemove = ParserHelpers.toConstantDependency(parser, process.env.NODE_ENV === 'production' ? '' : 'console.warn("UI5 tried to dynamically require a module. If it doesn\'t exist in the bundle a error might follow.")');
+
+    parser.hooks.call.for('sap.ui.require').tap('OpenUI5Plugin', (expr) => {
+      const param = parser.evaluateExpression(expr.arguments[0]);
+      if (expr.arguments[0].type === 'Literal') {
+        processItem(expr, param);
+        return true;
+      } else if (expr.arguments[0].type === 'ArrayExpression') {
+        processArray(expr, param);
+        return true;
+      }
+      return false;
+    });
+
+    parser.hooks.call.for('sap.ui.requireSync').tap('OpenUI5Plugin', (expr) => {
+      const param = parser.evaluateExpression(expr.arguments[0]);
+
+      let result = processItem(expr, param);
+      if (!result) {
+        result = processContext(expr, param);
+      }
+      return result;
+    });
+
+    parser.hooks.call.for('call lazyInstanceof').tap('OpenUI5Plugin', (expr) => {
+      const param1 = parser.evaluateExpression(expr.arguments[1]);
+      if (param1.string !== 'sap/ui/app/Application') {
+        const dep = new OpenUI5LazyInstanceDependency(param1.string, expr.arguments[0].name, expr.range);
+        dep.loc = expr.loc;
+        dep.optional = !!parser.scope.inTry;
+        parser.state.current.addDependency(dep);
+        return true;
+      }
+      return false;
+    });
+
+    parser.hooks.call.for('jQuery.sap.require').tap('OpenUI5Plugin', (expr) => {
+      const param = parser.evaluateExpression(expr.arguments[0]);
+      if (expr.arguments[0].type === 'Literal') {
+        processItem(expr, param);
+        return true;
+      }
+      processRemove(expr, param);
+      return false;
+    });
+
+    parser.hooks.call.for('$.sap.require').tap('OpenUI5Plugin', (expr) => {
+      const param = parser.evaluateExpression(expr.arguments[0]);
+      if (expr.arguments[0].type === 'Literal') {
+        processItem(expr, param);
+        return true;
+      }
+      return false;
     });
 
     Object.keys(globals).forEach((key) => {
-      parser.plugin(`expression ${key}`, expr => parser.applyPluginsBailResult('expression require:openui5:global', expr, globals[key]));
+      parser.hooks.expression.for(key).tap('OpenUI5Plugin', expr => processGlobal(expr, globals[key]));
     });
   }
 }

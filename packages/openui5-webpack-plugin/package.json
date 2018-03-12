@@ -26,11 +26,11 @@
   },
   "dependencies": {
     "async": "^2.6.0",
-    "tapable": "^0.2.8",
+    "tapable": "^1.0.0",
     "webpack-sources": "^1.1.0"
   },
   "peerDependencies": {
-    "webpack": "^2.0.0 || ^3.0.0"
+    "webpack": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -38,7 +38,7 @@
     "babel-jest": "^22.0.3",
     "cross-env": "^5.1.4",
     "jest": "^22.0.3",
-    "webpack": "^3.11.0",
+    "webpack": "^4.1.1",
     "xml-loader": "^1.2.1"
   }
 }

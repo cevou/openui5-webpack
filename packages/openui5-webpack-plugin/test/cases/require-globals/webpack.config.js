@@ -11,5 +11,6 @@ module.exports = {
   },
   plugins: [
     new OpenUI5Plugin()
-  ]
+  ],
+  mode: 'production'
 };

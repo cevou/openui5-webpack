@@ -27,12 +27,16 @@ describe('Integration TestCases', () => {
               use: {
                 loader: 'openui5-theme-loader',
                 options: {
-                  theme: 'sap_test'
+                  theme: 'sap_test',
+                  modules: [
+                    "test_components/test-library"
+                  ]
                 },
               },
             },
           ],
         },
+        mode: 'production'
       };
 
       const testDirectory = path.join(__dirname, 'cases', testCase);

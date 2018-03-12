@@ -1,5 +1,7 @@
 const NullFactory = require('webpack/lib/NullFactory');
 const LocalModuleDependency = require('webpack/lib/dependencies/LocalModuleDependency');
+const ConstDependency = require('webpack/lib/dependencies/ConstDependency');
+const ContextElementDependency = require('webpack/lib/dependencies/ContextElementDependency');
 const OpenUI5DefineDependency = require('./OpenUI5DefineDependency');
 const OpenUI5DefineDependencyParserPlugin = require('./OpenUI5DefineDependencyParserPlugin');
 const OpenUI5LazyInstanceDependency = require('./OpenUI5LazyInstanceDependency');
@@ -18,12 +20,9 @@ class OpenUI5Plugin {
   apply(compiler) {
     const { options } = this;
 
-    const resourceModuleFactory = new OpenUI5ResourceModuleFactory(compiler.resolvers);
-    compiler.applyPlugins('openui5-resource-module-factory', resourceModuleFactory);
+    const resourceModuleFactory = new OpenUI5ResourceModuleFactory(compiler.resolverFactory);
 
-    compiler.plugin('compilation', (compilation, params) => {
-      const { normalModuleFactory, contextModuleFactory } = params;
-
+    compiler.hooks.compilation.tap('OpenUI5Plugin', (compilation, { normalModuleFactory, contextModuleFactory }) => {
       compilation.dependencyFactories.set(OpenUI5RequireItemDependency, normalModuleFactory);
       compilation.dependencyTemplates.set(OpenUI5RequireItemDependency, new OpenUI5RequireItemDependency.Template());
 
@@ -42,12 +41,16 @@ class OpenUI5Plugin {
       compilation.dependencyFactories.set(LocalModuleDependency, new NullFactory());
       compilation.dependencyTemplates.set(LocalModuleDependency, new LocalModuleDependency.Template());
 
-      normalModuleFactory.plugin('parser', (parser) => {
-        parser.apply(
-          new OpenUI5RequireDependencyParserPlugin(options),
-          new OpenUI5DefineDependencyParserPlugin(options),
-          new OpenUI5ResourceDependencyParserPlugin(options),
-        );
+      compilation.dependencyFactories.set(ConstDependency, new NullFactory());
+      compilation.dependencyTemplates.set(ConstDependency, new ConstDependency.Template());
+
+      compilation.dependencyFactories.set(ContextElementDependency, normalModuleFactory);
+      compilation.dependencyFactories.set(ContextElementDependency, normalModuleFactory);
+
+      normalModuleFactory.hooks.parser.for('javascript/auto').tap('OpenUI5Plugin', (parser) => {
+        new OpenUI5RequireDependencyParserPlugin(options).apply(parser);
+        new OpenUI5DefineDependencyParserPlugin(options).apply(parser);
+        new OpenUI5ResourceDependencyParserPlugin(options).apply(parser);
       });
     });
   }

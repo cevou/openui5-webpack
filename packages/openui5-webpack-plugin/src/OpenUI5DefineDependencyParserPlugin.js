@@ -13,7 +13,27 @@ class OpenUI5DefineDependencyParserPlugin {
   }
 
   apply(parser) {
-    parser.plugin('call sap.ui.define', (expr) => {
+    const processItem = (expr, param, namedModule) => {
+      let dep;
+      const localModule = LocalModulesHelpers.getLocalModule(parser.state, param.string, namedModule);
+      if (localModule) {
+        dep = new LocalModuleDependency(localModule, param.range);
+      } else {
+        dep = new OpenUI5RequireItemDependency(param.string, param.range);
+      }
+      dep.loc = expr.loc;
+      parser.state.current.addDependency(dep);
+      return true;
+    };
+
+    const processArray = (expr, param, namedModule) => {
+      param.items.forEach((param) => {
+        processItem(expr, param, namedModule);
+      });
+      return true;
+    };
+
+    parser.hooks.call.for('sap.ui.define').tap('OpenUI5Plugin', (expr) => {
       let array;
       let fn;
       let namedModule;
@@ -52,7 +72,7 @@ class OpenUI5DefineDependencyParserPlugin {
 
       if (array) {
         const param = parser.evaluateExpression(array);
-        const result = parser.applyPluginsBailResult('call define:openui5:array', expr, param, namedModule);
+        const result = processArray(expr, param, namedModule);
         if (!result) return false;
       }
 
@@ -74,26 +94,6 @@ class OpenUI5DefineDependencyParserPlugin {
       if (namedModule) {
         dep.localModule = LocalModulesHelpers.addLocalModule(parser.state, namedModule);
       }
-      parser.state.current.addDependency(dep);
-      return true;
-    });
-
-    parser.plugin('call define:openui5:array', (expr, param, namedModule) => {
-      param.items.forEach((param) => {
-        parser.applyPluginsBailResult('call define:openui5:item', expr, param, namedModule);
-      });
-      return true;
-    });
-
-    parser.plugin('call define:openui5:item', (expr, param, namedModule) => {
-      let dep;
-      const localModule = LocalModulesHelpers.getLocalModule(parser.state, param.string, namedModule);
-      if (localModule) {
-        dep = new LocalModuleDependency(localModule, param.range);
-      } else {
-        dep = new OpenUI5RequireItemDependency(param.string, param.range);
-      }
-      dep.loc = expr.loc;
       parser.state.current.addDependency(dep);
       return true;
     });
