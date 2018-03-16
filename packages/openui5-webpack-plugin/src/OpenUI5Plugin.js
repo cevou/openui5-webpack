@@ -1,3 +1,4 @@
+const cssnano = require('cssnano');
 const lessOpenUI5 = require('less-openui5');
 const Chunk = require('webpack/lib/Chunk');
 const { OriginalSource } = require('webpack-sources');
@@ -74,11 +75,11 @@ class OpenUI5Plugin {
               library: {
                 name: lib,
               },
-            }).then((result) => {
+            }).then(result => cssnano.process(result.css).then((result) => {
               const file = `${libPath}/library.css`;
               compilation.assets[file] = new OriginalSource(result.css, file);
               chunk.files.push(file);
-            }).catch(callback);
+            })).catch(callback);
 
             promises.push(promise);
           }

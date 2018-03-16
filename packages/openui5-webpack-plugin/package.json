@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "async": "^2.6.0",
+    "cssnano": "^3.10.0",
     "less-openui5": "^0.5.1",
     "tapable": "^1.0.0",
     "webpack-sources": "^1.1.0"
