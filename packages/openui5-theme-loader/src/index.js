@@ -4,7 +4,7 @@ const loaderUtils = require('loader-utils');
 module.exports = function (source) {
   const defaultOptions = {
     theme: 'sap_belize',
-    modules: ['node_modules'],
+    rootPaths: ['node_modules'],
   };
 
   const options = Object.assign(
@@ -15,7 +15,7 @@ module.exports = function (source) {
 
   const callback = this.async();
   const theme = options.theme;
-  const modules = options.modules;
+  const modules = options.rootPaths;
   const ext = path.extname(this.resourcePath);
   let name = this.resourcePath.replace(ext, '');
 

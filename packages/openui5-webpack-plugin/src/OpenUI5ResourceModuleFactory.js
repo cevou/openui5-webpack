@@ -56,7 +56,7 @@ class OpenUI5ResourceModuleFactory extends Tapable {
       async.map(resources, (resource, callback) => {
         normalResolver.resolve({}, dependency.context, resource, {}, (err) => {
           if (err) {
-            callback(err);
+            callback();
             return;
           }
           callback(null, resource);
@@ -67,11 +67,13 @@ class OpenUI5ResourceModuleFactory extends Tapable {
           return;
         }
 
+        const resources = result.filter(resource => resource);
+
         this.hooks.afterResolve.callAsync({
           context,
           modulePath,
           extensions,
-          resources: result,
+          resources,
           failOnError,
         }, (err, result) => {
           if (err) return callback(err);

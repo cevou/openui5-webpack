@@ -1,3 +1,6 @@
+const lessOpenUI5 = require('less-openui5');
+const Chunk = require('webpack/lib/Chunk');
+const { OriginalSource } = require('webpack-sources');
 const NullFactory = require('webpack/lib/NullFactory');
 const LocalModuleDependency = require('webpack/lib/dependencies/LocalModuleDependency');
 const ConstDependency = require('webpack/lib/dependencies/ConstDependency');
@@ -14,7 +17,7 @@ const OpenUI5ResourceModuleFactory = require('./OpenUI5ResourceModuleFactory');
 
 class OpenUI5Plugin {
   constructor(options) {
-    this.options = options;
+    this.options = options || {};
   }
 
   apply(compiler) {
@@ -53,6 +56,40 @@ class OpenUI5Plugin {
         new OpenUI5ResourceDependencyParserPlugin(options).apply(parser);
       });
     });
+
+    if (options.theme) {
+      compiler.hooks.thisCompilation.tap('OpenUI5Plugin', (compilation) => {
+        compilation.hooks.additionalAssets.tapAsync('OpenUI5Plugin', (callback) => {
+          const builder = new lessOpenUI5.Builder();
+          const promises = [];
+
+          const chunk = new Chunk('openui5_theme');
+          chunk.ids = [];
+
+          for (const lib of options.libs) {
+            const libPath = `${lib.replace(/\./g, '/')}/themes/${options.theme}`;
+            const promise = builder.build({
+              lessInputPath: `${libPath}/library.source.less`,
+              rootPaths: options.rootPaths,
+              library: {
+                name: lib,
+              },
+            }).then((result) => {
+              const file = `${libPath}/library.css`;
+              compilation.assets[file] = new OriginalSource(result.css, file);
+              chunk.files.push(file);
+            }).catch(callback);
+
+            promises.push(promise);
+          }
+
+          Promise.all(promises).then(() => {
+            compilation.chunks.push(chunk);
+            callback();
+          }).catch(callback);
+        });
+      });
+    }
   }
 }
 module.exports = OpenUI5Plugin;
