@@ -1,9 +1,40 @@
+import path from 'path';
 import { parseString } from 'xml2js';
+import loaderUtils from 'loader-utils';
 
 module.exports = function (source) {
+  const defaultOptions = {
+    modulePaths: [],
+  };
+
+  const options = Object.assign(
+    {},
+    defaultOptions,
+    loaderUtils.getOptions(this),
+  );
+
   const callback = this.async();
   const namespaces = {};
   const controls = {};
+  const modulePaths = {};
+
+  Object.keys(options.modulePaths).map((key) => {
+    let relative = path.relative(this.context, options.modulePaths[key]);
+    if (relative.substr(0, 1) !== '.') {
+      relative = `./${relative}`;
+    }
+
+    modulePaths[key.replace(/\./g, '/')] = relative;
+
+    return null;
+  });
+
+  const replaceModulePaths = (p) => {
+    Object.keys(modulePaths).forEach((modulePath) => {
+      p = p.replace(modulePath, modulePaths[modulePath]);
+    });
+    return p;
+  };
 
   parseString(source, (err, result) => {
     if (err) {
@@ -24,9 +55,10 @@ module.exports = function (source) {
     let requires = '';
     let objects = '';
     Object.keys(controls).forEach((name) => {
-      this.addDependency(name);
-      requires += `"${name}.js": function(){require("${name}")},\n`;
-      objects += `jQuery.sap.setObject("${name.replace(/\//g, '.')}", require("${name}"));\n`;
+      const path = replaceModulePaths(name);
+      this.addDependency(path);
+      requires += `"${name}.js": function(){require("${path}")},\n`;
+      objects += `jQuery.sap.setObject("${name.replace(/\//g, '.')}", require("${path}"));\n`;
     });
 
     const output = `
