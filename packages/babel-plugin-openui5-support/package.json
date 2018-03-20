@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-openui5-support",
   "description": "Handle support tool loading behavior for UI5",
-  "version": "0.1.0-beta.0",
+  "version": "0.1.0-beta.1",
   "license": "Apache-2.0",
   "author": "Christoph Kraemer <chr.kraemer@sap.com>",
   "keywords": [
