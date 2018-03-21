@@ -62,6 +62,7 @@ module.exports = function (source) {
     });
 
     const output = `
+      var jQuery = require('jquery.sap.global');
       jQuery.sap.registerPreloadedModules({
         version: "2.0",
         url: '.',
