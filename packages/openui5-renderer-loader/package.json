@@ -20,16 +20,19 @@
     "url": "https://github.com/cevou/openui5-webpack/issues"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src -d dist"
+    "build": "cross-env NODE_ENV=production babel src -d dist",
+    "test": "jest --collectCoverageFrom='src/**/*.js' --coverage"
   },
   "engines": {
     "node": ">= 5.10"
   },
   "dependencies": {
+    "loader-utils": "^1.1.0",
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "cross-env": "^5.1.4"
+    "cross-env": "^5.1.4",
+    "jest": "^22.4.3"
   }
 }

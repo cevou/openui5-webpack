@@ -1,6 +1,18 @@
+import loaderUtils from 'loader-utils';
+
 module.exports = function (source) {
+  const defaultOptions = {
+    filterRegEx: /[/\\]resources[/\\](.*)\.js$/,
+  };
+
+  const options = Object.assign(
+    {},
+    defaultOptions,
+    loaderUtils.getOptions(this),
+  );
+
   const path = this.resourcePath;
-  const control = path.match(/[/\\]resources[/\\](.*)\.js$/);
+  const control = path.match(options.filterRegEx);
 
   let output = source;
 

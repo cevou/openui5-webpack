@@ -2,11 +2,12 @@
 
 exports[`XML Loader should handle custom rootPaths 1`] = `
 "
+      var jQuery = require('jquery.sap.global');
       jQuery.sap.registerPreloadedModules({
         version: \\"2.0\\",
         url: '.',
         modules: {
-          \\"./fixtures/custom/TestControl.js\\": function(){require(\\"./fixtures/custom/TestControl\\")},
+          \\"my/custom/namespace/TestControl.js\\": function(){require(\\"./fixtures/custom/TestControl\\")},
 
         }
       });
