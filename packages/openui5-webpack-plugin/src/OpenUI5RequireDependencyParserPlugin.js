@@ -1,5 +1,6 @@
 const ParserHelpers = require('webpack/lib/ParserHelpers');
 const OpenUI5LazyInstanceDependency = require('./OpenUI5LazyInstanceDependency');
+const OpenUI5ViewDependency = require('./OpenUI5ViewDependency');
 const OpenUI5RequireItemDependency = require('./OpenUI5RequireItemDependency');
 const OpenUI5RequireContextDependency = require('./OpenUI5RequireContextDependency');
 const ContextDependencyHelpers = require('./ContextDependencyHelpers');
@@ -83,7 +84,7 @@ class OpenUI5RequireDependencyParserPlugin {
       return result;
     });
 
-    parser.hooks.call.for('call lazyInstanceof').tap('OpenUI5Plugin', (expr) => {
+    parser.hooks.call.for('lazyInstanceof').tap('OpenUI5Plugin', (expr) => {
       const param1 = parser.evaluateExpression(expr.arguments[1]);
       if (param1.string !== 'sap/ui/app/Application') {
         const dep = new OpenUI5LazyInstanceDependency(param1.string, expr.arguments[0].name, expr.range);
@@ -93,6 +94,15 @@ class OpenUI5RequireDependencyParserPlugin {
         return true;
       }
       return false;
+    });
+
+    parser.hooks.call.for('createView').tap('OpenUI5Plugin', (expr) => {
+      const param0 = parser.evaluateExpression(expr.arguments[0]);
+      const dep = new OpenUI5ViewDependency(param0.string, expr.arguments[1].name, expr.range);
+      dep.loc = expr.loc;
+      dep.optional = !!parser.scope.inTry;
+      parser.state.current.addDependency(dep);
+      return true;
     });
 
     parser.hooks.call.for('jQuery.sap.require').tap('OpenUI5Plugin', (expr) => {

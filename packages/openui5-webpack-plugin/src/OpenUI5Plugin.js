@@ -9,6 +9,7 @@ const ContextElementDependency = require('webpack/lib/dependencies/ContextElemen
 const OpenUI5DefineDependency = require('./OpenUI5DefineDependency');
 const OpenUI5DefineDependencyParserPlugin = require('./OpenUI5DefineDependencyParserPlugin');
 const OpenUI5LazyInstanceDependency = require('./OpenUI5LazyInstanceDependency');
+const OpenUI5ViewDependency = require('./OpenUI5ViewDependency');
 const OpenUI5RequireDependencyParserPlugin = require('./OpenUI5RequireDependencyParserPlugin');
 const OpenUI5RequireItemDependency = require('./OpenUI5RequireItemDependency');
 const OpenUI5RequireContextDependency = require('./OpenUI5RequireContextDependency');
@@ -41,6 +42,9 @@ class OpenUI5Plugin {
 
       compilation.dependencyFactories.set(OpenUI5ResourceDependency, resourceModuleFactory);
       compilation.dependencyTemplates.set(OpenUI5ResourceDependency, new OpenUI5ResourceDependency.Template());
+
+      compilation.dependencyFactories.set(OpenUI5ViewDependency, normalModuleFactory);
+      compilation.dependencyTemplates.set(OpenUI5ViewDependency, new OpenUI5ViewDependency.Template());
 
       compilation.dependencyFactories.set(LocalModuleDependency, new NullFactory());
       compilation.dependencyTemplates.set(LocalModuleDependency, new LocalModuleDependency.Template());

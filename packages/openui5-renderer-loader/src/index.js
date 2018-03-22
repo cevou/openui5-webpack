@@ -23,9 +23,10 @@ module.exports = function (source) {
     this.resolve(this.context, rendererName, (err) => {
       if (!err) {
         this.addDependency(rendererName);
-        output = `var jQuery = require('jquery.sap.global');
-${source}
-jQuery.sap.setObject("${rendererName.replace(/\//g, '.')}", require("${rendererName}"));`;
+        output = `${source}
+sap.ui.define(['jquery.sap.global'], function(jQuery) {
+jQuery.sap.setObject("${rendererName.replace(/\//g, '.')}", require("${rendererName}"));
+});`;
       }
       callback(null, output);
     });
