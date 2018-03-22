@@ -3,7 +3,7 @@
   "name": "openui5-webpack",
   "scripts": {
     "postinstall": "lerna bootstrap --stream",
-    "publish": "npm run build && lerna publish --npm-tag=next",
+    "publish": "lerna publish --npm-tag=next",
     "test": "nyc lerna run test",
     "lint": "eslint . --cache",
     "prepublish": "npm run build",
