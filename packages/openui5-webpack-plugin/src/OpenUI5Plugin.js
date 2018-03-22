@@ -79,7 +79,9 @@ class OpenUI5Plugin {
               library: {
                 name: lib,
               },
-            }).then(result => cssnano.process(result.css).then((result) => {
+            }).then(result => cssnano.process(result.css, {
+              postcssNormalizeUrl: false,
+            }).then((result) => {
               const file = `${libPath}/library.css`;
               compilation.assets[file] = new OriginalSource(result.css, file);
               chunk.files.push(file);
