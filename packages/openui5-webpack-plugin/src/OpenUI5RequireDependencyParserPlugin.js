@@ -19,6 +19,8 @@ class OpenUI5RequireDependencyParserPlugin {
       'sap.m.CheckBox': 'sap/m/CheckBox',
       'sap.viz.ui5.theming.Util': 'sap/viz/ui5/theming/Util',
       'sap.ui.unified.DateRange': 'sap/ui/unified/DateRange',
+      'sap.ui.core.IconPool': 'sap/ui/core/IconPool',
+      'sap.m.IconTabHeader': 'sap/m/IconTabHeader',
     };
 
     const processItem = (expr, param) => {
