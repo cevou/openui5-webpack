@@ -31,5 +31,9 @@ module.exports = {
       translations: ['en']
     }),
   ],
+  optimization: {
+    minimize: false,
+    runtimeChunk: 'single',
+  },
   mode: 'production'
 };

@@ -92,7 +92,7 @@ function openui5ResourceResolve(req, failOnError) {
       throw new Error("Cannot find module '" + req + "'.");
     }
     return null;
-  }  
+  }
   return id;
 };
 openui5Resource.keys = function openui5ResourceKeys() {

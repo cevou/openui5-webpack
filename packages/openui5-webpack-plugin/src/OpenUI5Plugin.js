@@ -11,6 +11,7 @@ const OpenUI5DefineDependencyParserPlugin = require('./OpenUI5DefineDependencyPa
 const OpenUI5LazyInstanceDependency = require('./OpenUI5LazyInstanceDependency');
 const OpenUI5ViewDependency = require('./OpenUI5ViewDependency');
 const OpenUI5RequireDependencyParserPlugin = require('./OpenUI5RequireDependencyParserPlugin');
+const OpenUI5RequireDependency = require('./OpenUI5RequireDependency');
 const OpenUI5RequireItemDependency = require('./OpenUI5RequireItemDependency');
 const OpenUI5RequireContextDependency = require('./OpenUI5RequireContextDependency');
 const OpenUI5ResourceDependencyParserPlugin = require('./OpenUI5ResourceDependencyParserPlugin');
@@ -28,6 +29,9 @@ class OpenUI5Plugin {
     const resourceModuleFactory = new OpenUI5ResourceModuleFactory(compiler.resolverFactory);
 
     compiler.hooks.compilation.tap('OpenUI5Plugin', (compilation, { normalModuleFactory, contextModuleFactory }) => {
+      compilation.dependencyFactories.set(OpenUI5RequireDependency, normalModuleFactory);
+      compilation.dependencyTemplates.set(OpenUI5RequireDependency, new OpenUI5RequireDependency.Template());
+
       compilation.dependencyFactories.set(OpenUI5RequireItemDependency, normalModuleFactory);
       compilation.dependencyTemplates.set(OpenUI5RequireItemDependency, new OpenUI5RequireItemDependency.Template());
 

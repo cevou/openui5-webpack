@@ -24,6 +24,10 @@ describe('Integration TestCases', () => {
         plugins: [
           new OpenUI5Plugin(),
         ],
+        optimization: {
+          minimize: false,
+          runtimeChunk: 'single',
+        },
         mode: 'production'
       };
 

@@ -25,9 +25,9 @@
     "node": ">= 5.10"
   },
   "dependencies": {
-    "async": "^2.6.0",
+    "async": "^2.6.1",
     "cssnano": "^3.10.0",
-    "less-openui5": "^0.5.1",
+    "less-openui5": "^0.5.3",
     "tapable": "^1.0.0",
     "webpack-sources": "^1.1.0"
   },
@@ -36,11 +36,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-jest": "^22.0.3",
-    "cross-env": "^5.1.4",
-    "jest": "^22.0.3",
-    "webpack": "^4.1.1",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.0.1",
+    "cross-env": "^5.1.6",
+    "jest": "^23.1.0",
+    "webpack": "^4.11.0",
     "xml-loader": "^1.2.1"
   }
 }

@@ -1,3 +1,3 @@
-sap.ui.require(['./a'], function(a) {
+sap.ui.require(['./a', './b'], function(a, b) {
 
 });

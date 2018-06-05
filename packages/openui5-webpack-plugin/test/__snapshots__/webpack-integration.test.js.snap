@@ -1,43 +1,575 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Integration TestCases define-dep-fcn 1`] = `"!function(t){var e={};function n(r){if(e[r])return e[r].exports;var o=e[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:r})},n.r=function(t){Object.defineProperty(t,\\"__esModule\\",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,\\"a\\",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p=\\"\\",n(n.s=1)}([function(t,e){t.exports=\\"test\\"},function(t,e,n){var r,o;r=[n(0)],void 0===(o=function(){return\\"test\\"}.apply(e,r))||(t.exports=o)}]);"`;
+exports[`Integration TestCases define-dep-fcn 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
 
-exports[`Integration TestCases define-dep-fcn-exp 1`] = `"!function(t){var e={};function n(r){if(e[r])return e[r].exports;var o=e[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:r})},n.r=function(t){Object.defineProperty(t,\\"__esModule\\",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,\\"a\\",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p=\\"\\",n(n.s=1)}([function(t,e){t.exports=\\"test\\"},function(t,e,n){var r,o;r=[n(0)],void 0===(o=function(){return\\"test\\"}.apply(e,r))||(t.exports=o)}]);"`;
+module.exports = 'test';
 
-exports[`Integration TestCases define-fcn 1`] = `"!function(e){var t={};function r(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:n})},r.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,\\"a\\",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p=\\"\\",r(r.s=0)}([function(e,t,r){var n;void 0===(n=function(){return\\"test\\"}.call(t,r,t,e))||(e.exports=n)}]);"`;
 
-exports[`Integration TestCases define-fcn-exp 1`] = `"!function(e){var t={};function r(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:n})},r.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,\\"a\\",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p=\\"\\",r(r.s=0)}([function(e,t,r){var n;void 0===(n=function(){return\\"test\\"}.call(t,r,t,e))||(e.exports=n)}]);"`;
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
-exports[`Integration TestCases define-name-dep-fcn 1`] = `"!function(t){var e={};function n(r){if(e[r])return e[r].exports;var o=e[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:r})},n.r=function(t){Object.defineProperty(t,\\"__esModule\\",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,\\"a\\",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p=\\"\\",n(n.s=1)}([function(t,e){t.exports=\\"test\\"},function(t,e,n){var r,o;r=[n(0)],void 0===(o=function(){return\\"test\\"}.apply(e,r))||(t.exports=o)}]);"`;
+var __WEBPACK_UI5_DEFINE_ARRAY__, __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_UI5_DEFINE_RESULT__ = function() {
+  return 'test';
+}.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__),
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
-exports[`Integration TestCases define-name-dep-fcn-exp 1`] = `"!function(t){var e={};function n(r){if(e[r])return e[r].exports;var o=e[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:r})},n.r=function(t){Object.defineProperty(t,\\"__esModule\\",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,\\"a\\",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p=\\"\\",n(n.s=1)}([function(t,e){t.exports=\\"test\\"},function(t,e,n){var r,o;r=[n(0)],void 0===(o=function(){return\\"test\\"}.apply(e,r))||(t.exports=o)}]);"`;
 
-exports[`Integration TestCases define-name-fcn 1`] = `"!function(e){var t={};function r(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:n})},r.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,\\"a\\",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p=\\"\\",r(r.s=0)}([function(e,t,r){var n;void 0===(n=function(){return\\"test\\"}.call(t,r,t,e))||(e.exports=n)}]);"`;
+/***/ })
+],[[1,0]]]);"
+`;
 
-exports[`Integration TestCases jquery-require 1`] = `"!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,\\"a\\",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p=\\"\\",n(n.s=1)}([function(e,t){e.exports=\\"test\\"},function(e,t,n){n(0),n(0)}]);"`;
+exports[`Integration TestCases define-dep-fcn-exp 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
 
-exports[`Integration TestCases require-array 1`] = `"!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,\\"a\\",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p=\\"\\",n(n.s=1)}([function(e,t){e.exports=\\"test\\"},function(e,t,n){n(0)}]);"`;
+module.exports = 'test';
 
-exports[`Integration TestCases require-context 1`] = `"!function(e){var n={};function r(t){if(n[t])return n[t].exports;var o=n[t]={i:t,l:!1,exports:{}};return e[t].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=n,r.d=function(e,n,t){r.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:t})},r.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},r.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(n,\\"a\\",n),n},r.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},r.p=\\"\\",r(r.s=2)}([function(e,n){e.exports=\\"test\\"},function(e,n,r){var t={\\"./a\\":0,\\"./a.js\\":0};function o(e){var n=u(e);return r(n)}function u(e){var n=t[e];if(!(n+1)){var r=new Error('Cannot find module \\"'+e+'\\".');throw r.code=\\"MODULE_NOT_FOUND\\",r}return n}o.keys=function(){return Object.keys(t)},o.resolve=u,e.exports=o,o.id=1},function(e,n,r){r(1)(\\"./a\\")}]);"`;
 
-exports[`Integration TestCases require-globals 1`] = `"!function(t){var e={};function n(r){if(e[r])return e[r].exports;var o=e[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:r})},n.r=function(t){Object.defineProperty(t,\\"__esModule\\",{value:!0})},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,\\"a\\",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p=\\"\\",n(n.s=1)}([function(t,e){t.exports.test=function(){}},function(t,e,n){n(0).test()}]);"`;
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
-exports[`Integration TestCases require-item 1`] = `"!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,\\"a\\",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p=\\"\\",n(n.s=1)}([function(e,t){e.exports=\\"test\\"},function(e,t,n){n(0)}]);"`;
+var __WEBPACK_UI5_DEFINE_ARRAY__, __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_UI5_DEFINE_RESULT__ = function() {
+  return 'test';
+}.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__),
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
-exports[`Integration TestCases require-lazyinstance 1`] = `"!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,\\"a\\",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p=\\"\\",n(n.s=1)}([function(e,t){e.exports=\\"test\\"},function(e,t,n){n(0)}]);"`;
 
-exports[`Integration TestCases require-sync 1`] = `"!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,\\"a\\",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p=\\"\\",n(n.s=1)}([function(e,t){e.exports=\\"test\\"},function(e,t,n){n(0)}]);"`;
+/***/ })
+],[[1,0]]]);"
+`;
 
-exports[`Integration TestCases require-unknown-context 1`] = `"!function(e){var r={};function t(n){if(r[n])return r[n].exports;var o=r[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,t),o.l=!0,o.exports}t.m=e,t.c=r,t.d=function(e,r,n){t.o(e,r)||Object.defineProperty(e,r,{configurable:!1,enumerable:!0,get:n})},t.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},t.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(r,\\"a\\",r),r},t.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},t.p=\\"\\",t(t.s=0)}([function(e,r){console.warn(\\"UI5 tried to dynamically require a module. If it doesn't exist in the bundle a error might follow.\\")}]);"`;
+exports[`Integration TestCases define-fcn 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
 
-exports[`Integration TestCases require-view 1`] = `"!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,\\"a\\",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p=\\"\\",n(n.s=1)}([function(e,t){e.exports=\\"test\\"},function(e,t,n){new(n(0))(void 0)}]);"`;
+var __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_RESULT__ = function() {
+  return 'test';
+}.call(exports, __webpack_require__, exports, module),
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
-exports[`Integration TestCases resource 1`] = `"!function(e){var n={};function r(t){if(n[t])return n[t].exports;var o=n[t]={i:t,l:!1,exports:{}};return e[t].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=n,r.d=function(e,n,t){r.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:t})},r.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},r.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(n,\\"a\\",n),n},r.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},r.p=\\"\\",r(r.s=1)}([function(e,n,r){var t={\\"./context/a.xml\\":2};function o(e,n){var t=u(e,n);if(null===t)return null;if(!r.m[t])throw new Error(\\"Module '\\"+e+\\"' ('\\"+t+\\"') is not available (weak dependency)\\");return r(t)}function u(e,n){var r=t[e];if(!(r+1)){if(n)throw new Error(\\"Cannot find module '\\"+e+\\"'.\\");return null}return r}o.keys=function(){return Object.keys(t)},o.resolve=u,o.id=0,e.exports=o},function(e,n,r){r(0)(\\"a.xml\\".replace(/^(?:\\\\.\\\\/)?/,\\".\\"),!0)}]);"`;
 
-exports[`Integration TestCases resource-fail-on-error 1`] = `"!function(e){var n={};function r(t){if(n[t])return n[t].exports;var o=n[t]={i:t,l:!1,exports:{}};return e[t].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=n,r.d=function(e,n,t){r.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:t})},r.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},r.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(n,\\"a\\",n),n},r.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},r.p=\\"\\",r(r.s=1)}([function(e,n,r){var t={\\"./a.xml\\":2};function o(e,n){var t=u(e,n);if(null===t)return null;if(!r.m[t])throw new Error(\\"Module '\\"+e+\\"' ('\\"+t+\\"') is not available (weak dependency)\\");return r(t)}function u(e,n){var r=t[e];if(!(r+1)){if(n)throw new Error(\\"Cannot find module '\\"+e+\\"'.\\");return null}return r}o.keys=function(){return Object.keys(t)},o.resolve=u,o.id=0,e.exports=o},function(e,n,r){r(0)(\\"sap/ui/test/a.xml\\".replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/,\\".\\"),!1)}]);"`;
+/***/ })
+],[[0,0]]]);"
+`;
 
-exports[`Integration TestCases resource-library 1`] = `"!function(e){var r={};function n(t){if(r[t])return r[t].exports;var o=r[t]={i:t,l:!1,exports:{}};return e[t].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=r,n.d=function(e,r,t){n.o(e,r)||Object.defineProperty(e,r,{configurable:!1,enumerable:!0,get:t})},n.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},n.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(r,\\"a\\",r),r},n.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},n.p=\\"\\",n(n.s=1)}([function(e,r,n){var t={\\"./a.xml\\":6,\\"./sap/m/messagebundle.properties\\":5,\\"./sap/ui/core/messagebundle.properties\\":4,\\"./sap/ui/core/messagebundle_en.properties\\":3,\\"sap/ui/core/cldr/en.json\\":2};function o(e,r){var t=u(e,r);if(null===t)return null;if(!n.m[t])throw new Error(\\"Module '\\"+e+\\"' ('\\"+t+\\"') is not available (weak dependency)\\");return n(t)}function u(e,r){var n=t[e];if(!(n+1)){if(r)throw new Error(\\"Cannot find module '\\"+e+\\"'.\\");return null}return n}o.keys=function(){return Object.keys(t)},o.resolve=u,o.id=0,e.exports=o},function(e,r,n){n(0)(\\"sap/ui/test/a.xml\\".replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/,\\".\\"),!0)}]);"`;
+exports[`Integration TestCases define-fcn-exp 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
 
-exports[`Integration TestCases resource-object 1`] = `"!function(e){var n={};function r(t){if(n[t])return n[t].exports;var o=n[t]={i:t,l:!1,exports:{}};return e[t].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=n,r.d=function(e,n,t){r.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:t})},r.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},r.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(n,\\"a\\",n),n},r.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},r.p=\\"\\",r(r.s=1)}([function(e,n,r){var t={\\"./context/a.xml\\":2};function o(e,n){var t=u(e,n);if(null===t)return null;if(!r.m[t])throw new Error(\\"Module '\\"+e+\\"' ('\\"+t+\\"') is not available (weak dependency)\\");return r(t)}function u(e,n){var r=t[e];if(!(r+1)){if(n)throw new Error(\\"Cannot find module '\\"+e+\\"'.\\");return null}return r}o.keys=function(){return Object.keys(t)},o.resolve=u,o.id=0,e.exports=o},function(e,n,r){r(0)(\\"a.xml\\".replace(/^(?:\\\\.\\\\/)?/,\\".\\"),!0)}]);"`;
+var __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_RESULT__ = function() {
+  return 'test';
+}.call(exports, __webpack_require__, exports, module),
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
 
-exports[`Integration TestCases resource-path-replace 1`] = `"!function(e){var n={};function r(t){if(n[t])return n[t].exports;var o=n[t]={i:t,l:!1,exports:{}};return e[t].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=n,r.d=function(e,n,t){r.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:t})},r.r=function(e){Object.defineProperty(e,\\"__esModule\\",{value:!0})},r.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(n,\\"a\\",n),n},r.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},r.p=\\"\\",r(r.s=1)}([function(e,n,r){var t={\\"./a.xml\\":2};function o(e,n){var t=u(e,n);if(null===t)return null;if(!r.m[t])throw new Error(\\"Module '\\"+e+\\"' ('\\"+t+\\"') is not available (weak dependency)\\");return r(t)}function u(e,n){var r=t[e];if(!(r+1)){if(n)throw new Error(\\"Cannot find module '\\"+e+\\"'.\\");return null}return r}o.keys=function(){return Object.keys(t)},o.resolve=u,o.id=0,e.exports=o},function(e,n,r){r(0)(\\"sap/ui/test/a.xml\\".replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/,\\".\\"),!0)}]);"`;
+
+/***/ })
+],[[0,0]]]);"
+`;
+
+exports[`Integration TestCases define-name-dep-fcn 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = 'test';
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_UI5_DEFINE_ARRAY__, __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_UI5_DEFINE_RESULT__ = function() {
+  return 'test';
+}.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__),
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases define-name-dep-fcn-exp 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = 'test';
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_UI5_DEFINE_ARRAY__, __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_UI5_DEFINE_RESULT__ = function() {
+  return 'test';
+}.apply(exports, __WEBPACK_UI5_DEFINE_ARRAY__),
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases define-name-fcn 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_UI5_DEFINE_RESULT__;!(__WEBPACK_UI5_DEFINE_RESULT__ = function() {
+  return 'test';
+}.call(exports, __webpack_require__, exports, module),
+        __WEBPACK_UI5_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_UI5_DEFINE_RESULT__));
+
+
+/***/ })
+],[[0,0]]]);"
+`;
+
+exports[`Integration TestCases jquery-require 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = 'test';
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(0);
+__webpack_require__(0);
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases require-array 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = 'b';
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = 'a';
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_UI5_REQUIRE_DEPENDENCIES__;__WEBPACK_UI5_REQUIRE_DEPENDENCIES__ = [__webpack_require__(1), __webpack_require__(0)], function(a, b) {
+
+}.apply(null, __WEBPACK_UI5_REQUIRE_DEPENDENCIES__);
+
+
+/***/ })
+],[[2,0]]]);"
+`;
+
+exports[`Integration TestCases require-context 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = 'test';
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./a\\": 0,
+	\\"./a.js\\": 0
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) { // check for number or string
+		var e = new Error(\\"Cannot find module '\\" + req + \\"'\\");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return id;
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 1;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'a';
+__webpack_require__(1)(\\"./\\" + a);
+
+
+/***/ })
+],[[2,0]]]);"
+`;
+
+exports[`Integration TestCases require-globals 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports.test = function() {};
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+(__webpack_require__(0)).test();
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases require-item 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = 'test';
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(0);
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases require-lazyinstance 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = 'test';
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var test = function() {};
+(test instanceof __webpack_require__(0));
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases require-sync 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = 'test';
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(0);
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases require-unknown-context 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+const a = 'a';
+console.warn(\\"UI5 tried to dynamically require a module. If it doesn't exist in the bundle a error might follow.\\");
+
+
+/***/ })
+],[[0,0]]]);"
+`;
+
+exports[`Integration TestCases require-view 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = 'test';
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+new (__webpack_require__(0))(undefined);
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases resource 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./context/a.xml\\": 2
+};
+function openui5Resource(req, failOnError) {
+  var id = openui5ResourceResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5ResourceResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5Resource.keys = function openui5ResourceKeys() {
+  return Object.keys(map);
+};
+openui5Resource.resolve = openui5ResourceResolve;
+openui5Resource.id = 0;
+module.exports = openui5Resource;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'a.xml';
+__webpack_require__(0)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true);
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases resource-fail-on-error 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./a.xml\\": 2
+};
+function openui5Resource(req, failOnError) {
+  var id = openui5ResourceResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5ResourceResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5Resource.keys = function openui5ResourceKeys() {
+  return Object.keys(map);
+};
+openui5Resource.resolve = openui5ResourceResolve;
+openui5Resource.id = 0;
+module.exports = openui5Resource;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'sap/ui/test/a.xml';
+__webpack_require__(0)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\"), false);
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases resource-library 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./a.xml\\": 6,
+	\\"./sap/m/messagebundle.properties\\": 5,
+	\\"./sap/ui/core/messagebundle.properties\\": 4,
+	\\"./sap/ui/core/messagebundle_en.properties\\": 3,
+	\\"sap/ui/core/cldr/en.json\\": 2
+};
+function openui5Resource(req, failOnError) {
+  var id = openui5ResourceResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5ResourceResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5Resource.keys = function openui5ResourceKeys() {
+  return Object.keys(map);
+};
+openui5Resource.resolve = openui5ResourceResolve;
+openui5Resource.id = 0;
+module.exports = openui5Resource;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'sap/ui/test/a.xml';
+__webpack_require__(0)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\"), true);
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases resource-object 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./context/a.xml\\": 2
+};
+function openui5Resource(req, failOnError) {
+  var id = openui5ResourceResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5ResourceResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5Resource.keys = function openui5ResourceKeys() {
+  return Object.keys(map);
+};
+openui5Resource.resolve = openui5ResourceResolve;
+openui5Resource.id = 0;
+module.exports = openui5Resource;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'a.xml';
+__webpack_require__(0)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true);
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
+exports[`Integration TestCases resource-path-replace 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./a.xml\\": 2
+};
+function openui5Resource(req, failOnError) {
+  var id = openui5ResourceResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5ResourceResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5Resource.keys = function openui5ResourceKeys() {
+  return Object.keys(map);
+};
+openui5Resource.resolve = openui5ResourceResolve;
+openui5Resource.id = 0;
+module.exports = openui5Resource;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'sap/ui/test/a.xml';
+__webpack_require__(0)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\"), true);
+
+
+/***/ })
+],[[1,0]]]);"
+`;

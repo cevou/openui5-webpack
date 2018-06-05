@@ -19,5 +19,9 @@ module.exports = {
       modulePath: "sap/ui/test",
     }),
   ],
+  optimization: {
+    minimize: false,
+    runtimeChunk: 'single',
+  },
   mode: 'production'
 };
