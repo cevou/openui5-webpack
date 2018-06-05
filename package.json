@@ -4,7 +4,7 @@
   "scripts": {
     "postinstall": "lerna bootstrap --stream",
     "publish": "lerna publish --npm-tag=next",
-    "test": "nyc lerna run test",
+    "test": "lerna run test",
     "lint": "eslint . --cache",
     "prepublish": "npm run build",
     "build": "lerna run build --stream"

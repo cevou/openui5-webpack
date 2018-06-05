@@ -1,11 +1,10 @@
 sudo: false
 language: node_js
 node_js:
-  - "5"
   - "6"
-  - "7"
   - "8"
   - "9"
+  - "10"
 cache:
   directories:
     - packages/babel-plugin-openui5-remove-support/node_modules
