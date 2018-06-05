@@ -28,6 +28,10 @@ describe('Integration TestCases', () => {
             },
           ],
         },
+        optimization: {
+          minimize: false,
+          runtimeChunk: 'single',
+        },
         mode: 'production'
       };
 

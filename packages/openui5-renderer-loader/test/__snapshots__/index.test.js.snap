@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Renderer Loader should handle control filter 1`] = `
-"var jQuery = require('jquery.sap.global');
-test-content
-jQuery.sap.setObject(\\"abc.TestRenderer\\", require(\\"abc/TestRenderer\\"));"
+"test-content
+sap.ui.define(['jquery.sap.global'], function(jQuery) {
+jQuery.sap.setObject(\\"abc.TestRenderer\\", require(\\"abc/TestRenderer\\"));
+});"
 `;
