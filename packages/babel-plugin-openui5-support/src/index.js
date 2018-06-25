@@ -99,15 +99,12 @@ export default function ({ types: t }) {
     )));
   }
 
-  function handleTechInfo(path, mode) {
-    const { callee } = path.node;
-    const args = path.node.arguments;
+  function handleOldTechInfo(path, mode, callee, args) {
+    const { object, property } = callee;
 
-    if (callee.type !== 'MemberExpression' || args.length !== 1) {
+    if (!object) {
       return;
     }
-
-    const { object, property } = callee;
 
     if (object.type !== 'Identifier' || property.type !== 'Identifier') {
       return;
@@ -119,7 +116,7 @@ export default function ({ types: t }) {
 
     const arg = args[0];
 
-    if (arg.type !== 'ObjectExpression') {
+    if (!arg || arg.type !== 'ObjectExpression') {
       return;
     }
 
@@ -187,6 +184,41 @@ export default function ({ types: t }) {
         }
       }
     });
+  }
+
+  function handleNewTechInfo(path, mode, callee) {
+    const obj = callee.object;
+
+    if (!obj || obj.type !== 'CallExpression') {
+      return;
+    }
+
+    const args = obj.arguments;
+    if (!args || args.length !== 2) {
+      return;
+    }
+
+    if (args[0].type !== 'StringLiteral' || args[0].value !== 'sap.ui.support') {
+      return;
+    }
+
+    const prop = obj.callee.property;
+    if (prop && prop.type === 'Identifier' && prop.name === 'loadLibrary') {
+      path.remove();
+    }
+
+  }
+
+  function handleTechInfo(path, mode) {
+    const { callee } = path.node;
+    const args = path.node.arguments;
+
+    if (callee.type !== 'MemberExpression' && args.length !== 1) {
+      return;
+    }
+
+    handleOldTechInfo(path, mode, callee, args);
+    handleNewTechInfo(path, mode, callee);
   }
 
   return {
