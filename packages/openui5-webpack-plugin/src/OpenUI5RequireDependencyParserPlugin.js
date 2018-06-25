@@ -139,8 +139,18 @@ class OpenUI5RequireDependencyParserPlugin {
     });
 
     parser.hooks.call.for('createView').tap('OpenUI5Plugin', (expr) => {
+      let dep;
       const param0 = parser.evaluateExpression(expr.arguments[0]);
-      const dep = new OpenUI5ViewDependency(param0.string, expr.arguments[1].name, expr.range);
+      if (expr.arguments[0].type === 'Literal') {
+        dep = new OpenUI5ViewDependency(param0.string, expr.arguments[1].name, expr.range);
+        if (!dep) {
+          return false
+        }
+      } else if (expr.arguments[0].type === 'Identifier') {
+        dep = ContextDependencyHelpers.createView(OpenUI5RequireContextDependency, expr.range, param0, expr, options);
+      } else {
+        return false;
+      }
       dep.loc = expr.loc;
       dep.optional = !!parser.scope.inTry;
       parser.state.current.addDependency(dep);

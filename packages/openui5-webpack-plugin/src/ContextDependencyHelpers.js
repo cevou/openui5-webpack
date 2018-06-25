@@ -34,3 +34,32 @@ ContextDependencyHelpers.create = function (Dep, range, param, expr, options, co
   }
   return null;
 };
+
+ContextDependencyHelpers.createView = function (Dep, range, param, expr, options, contextOptions) {
+  const prefix = 'sap/ui/core/mvc/';
+  const regExp = new RegExp(`View.js$`);
+  const dep = new Dep(Object.assign({
+    request: prefix,
+    recursive: options.wrappedContextRecursive,
+    regExp,
+    mode: 'weak',
+  }, contextOptions), range, param.range);
+  dep.loc = expr.loc;
+  dep.prepend = null;
+  dep.critical = options.wrappedContextCritical && 'a part of the request of a dependency is an expression';
+  dep.replaces = [
+    {
+      range: [dep.valueRange[0] - 1, dep.valueRange[0] - 1],
+      value: 'new (',
+    },
+    {
+      range: [dep.valueRange[1], dep.valueRange[1]],
+      value: '.replace("sap/ui/core/mvc", ".") + ".js")',
+    },
+    {
+      range: [dep.range[1], dep.range[1]],
+      value: '(oView)',
+    },
+  ];
+  return dep;
+};

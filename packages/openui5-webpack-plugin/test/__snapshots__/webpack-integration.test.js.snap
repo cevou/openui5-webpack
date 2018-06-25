@@ -340,6 +340,53 @@ new (__webpack_require__(0))(undefined);
 ],[[1,0]]]);"
 `;
 
+exports[`Integration TestCases require-view-context 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./DummyView.js\\": 2
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	if(!__webpack_require__.m[id]) {
+		var e = new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) { // check for number or string
+		var e = new Error(\\"Cannot find module '\\" + req + \\"'\\");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return id;
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+webpackContext.id = 0;
+module.exports = webpackContext;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var a = \\"sap/ui/core/mvc/DummyView\\";
+new (__webpack_require__(0)(a.replace(\\"sap/ui/core/mvc\\", \\".\\") + \\".js\\"))(oView);
+
+
+/***/ })
+],[[1,0]]]);"
+`;
+
 exports[`Integration TestCases resource 1`] = `
 "(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
 /* 0 */
