@@ -75,23 +75,30 @@ class OpenUI5Plugin {
           const chunk = new Chunk('openui5_theme');
           chunk.ids = [];
 
-          for (const lib of options.libs) {
-            const libPath = `${lib.replace(/\./g, '/')}/themes/${options.theme}`;
-            const promise = builder.build({
-              lessInputPath: `${libPath}/library.source.less`,
-              rootPaths: options.rootPaths,
-              library: {
-                name: lib,
-              },
-            }).then(result => cssnano.process(result.css, {
-              postcssNormalizeUrl: false,
-            }).then((result) => {
-              const file = `${libPath}/library.css`;
-              compilation.assets[file] = new OriginalSource(result.css, file);
-              chunk.files.push(file);
-            })).catch(callback);
+          let themes = options.theme;
+          if (!Array.isArray(themes)) {
+            themes = [themes];
+          }
 
-            promises.push(promise);
+          for (const theme of themes) {
+            for (const lib of options.libs) {
+              const libPath = `${lib.replace(/\./g, '/')}/themes/${theme}`;
+              const promise = builder.build({
+                lessInputPath: `${libPath}/library.source.less`,
+                rootPaths: options.rootPaths,
+                library: {
+                  name: lib,
+                },
+              }).then(result => cssnano.process(result.css, {
+                postcssNormalizeUrl: false,
+              }).then((result) => {
+                const file = `${libPath}/library.css`;
+                compilation.assets[file] = new OriginalSource(result.css, file);
+                chunk.files.push(file);
+              })).catch(callback);
+
+              promises.push(promise);
+            }
           }
 
           Promise.all(promises).then(() => {
