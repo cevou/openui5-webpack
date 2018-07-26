@@ -38,13 +38,12 @@ module.exports = function (source) {
 
   parseString(source, (err, result) => {
     if (err) {
-      callback(err);
+      callback(new Error(`Invalid XML: ${err.toString()}`));
       return;
     }
-    let view = result['mvc:View'];
-    if (!view) {
-      view = result['core:FragmentDefinition'];
-    }
+    const key = Object.keys(result)[0];
+    const view = result[key];
+
     const viewAttributes = view.$;
     Object.keys(viewAttributes).forEach((key) => {
       if (key.substr(0, 5) === 'xmlns') {

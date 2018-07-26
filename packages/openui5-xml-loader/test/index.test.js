@@ -22,5 +22,41 @@ describe('XML Loader', () => {
       context: __dirname,
       addDependency,
     }, [xml]);
-  })
+  });
+
+  it('should handle custom name for root element in view', (done) => {
+    const xml = `<m:View xmlns:m="sap.ui.core.mvc" xmlns="sap.m"><Button /></m:View>`;
+
+    loader.apply({
+      async: () => (err, data) => {
+        expect(data).toMatchSnapshot();
+        done();
+      },
+      addDependency: jest.fn(),
+    }, [xml]);
+  });
+
+  it('should handle a fragment', (done) => {
+    const xml = `<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m"><Button/></core:FragmentDefinition>`;
+
+    loader.apply({
+      async: () => (err, data) => {
+        expect(data).toMatchSnapshot();
+        done();
+      },
+      addDependency: jest.fn(),
+    }, [xml]);
+  });
+
+  it('should return an error if the XML is invalid', (done) => {
+    const xml = `<m:View xmlns:m="sap.ui.core.mvc" xmlns="sap.m"><Button></m:View>`;
+
+    loader.apply({
+      async: () => (err) => {
+        expect(err.toString()).toContain("Invalid XML");
+        done();
+      },
+      addDependency: jest.fn(),
+    }, [xml]);
+  });
 });

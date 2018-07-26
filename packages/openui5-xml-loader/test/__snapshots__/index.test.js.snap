@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`XML Loader should handle a fragment 1`] = `
+"
+      var jQuery = require('jquery.sap.global');
+      jQuery.sap.registerPreloadedModules({
+        version: \\"2.0\\",
+        url: '.',
+        modules: {
+          \\"sap/m/Button.js\\": function(){require(\\"sap/m/Button\\")},
+
+        }
+      });
+      jQuery.sap.setObject(\\"sap.m.Button\\", require(\\"sap/m/Button\\"));
+
+      var parser = new DOMParser();
+      var xml = parser.parseFromString(\\"<core:FragmentDefinition xmlns:core=\\\\\\"sap.ui.core\\\\\\" xmlns=\\\\\\"sap.m\\\\\\"><Button/></core:FragmentDefinition>\\", \\"text/xml\\");
+      module.exports = xml;
+    "
+`;
+
+exports[`XML Loader should handle custom name for root element in view 1`] = `
+"
+      var jQuery = require('jquery.sap.global');
+      jQuery.sap.registerPreloadedModules({
+        version: \\"2.0\\",
+        url: '.',
+        modules: {
+          \\"sap/m/Button.js\\": function(){require(\\"sap/m/Button\\")},
+
+        }
+      });
+      jQuery.sap.setObject(\\"sap.m.Button\\", require(\\"sap/m/Button\\"));
+
+      var parser = new DOMParser();
+      var xml = parser.parseFromString(\\"<m:View xmlns:m=\\\\\\"sap.ui.core.mvc\\\\\\" xmlns=\\\\\\"sap.m\\\\\\"><Button /></m:View>\\", \\"text/xml\\");
+      module.exports = xml;
+    "
+`;
+
 exports[`XML Loader should handle custom rootPaths 1`] = `
 "
       var jQuery = require('jquery.sap.global');
