@@ -1,7 +1,7 @@
 const Dependency = require('webpack/lib/Dependency');
 const WebpackMissingModule = require('webpack/lib/dependencies/WebpackMissingModule');
 
-class OpenUI5ResourceDependency extends Dependency {
+class ResourceDependency extends Dependency {
   constructor(context, modulePath, extensions, libraries, translations, failOnError, range, valueRange) {
     super();
     this.context = context;
@@ -23,7 +23,7 @@ class OpenUI5ResourceDependency extends Dependency {
   }
 }
 
-OpenUI5ResourceDependency.Template = class OpenUI5ResourceDependencyTemplate {
+ResourceDependency.Template = class ResourceDependencyTemplate {
   apply(dep, source) {
     const containsDeps = dep.module && dep.module.dependencies && dep.module.dependencies.length > 0;
     if (containsDeps) {
@@ -36,4 +36,4 @@ OpenUI5ResourceDependency.Template = class OpenUI5ResourceDependencyTemplate {
   }
 };
 
-module.exports = OpenUI5ResourceDependency;
+module.exports = ResourceDependency;

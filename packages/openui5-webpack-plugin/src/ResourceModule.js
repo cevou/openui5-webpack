@@ -5,7 +5,7 @@ const ContextElementDependency = require('webpack/lib/dependencies/ContextElemen
 const OriginalSource = require('webpack-sources').OriginalSource;
 const RawSource = require('webpack-sources').RawSource;
 
-class OpenUI5ResourceModule extends Module {
+class ResourceModule extends Module {
   constructor(options) {
     super('javascript/dynamic', options.context);
     this.options = options;
@@ -196,4 +196,4 @@ webpackEmptyContext.id = ${JSON.stringify(id)};`;
   }
 }
 
-module.exports = OpenUI5ResourceModule;
+module.exports = ResourceModule;

@@ -1,6 +1,5 @@
 const cssnano = require('cssnano');
 const lessOpenUI5 = require('less-openui5');
-const Chunk = require('webpack/lib/Chunk');
 const { OriginalSource } = require('webpack-sources');
 const NullFactory = require('webpack/lib/NullFactory');
 const LocalModuleDependency = require('webpack/lib/dependencies/LocalModuleDependency');
@@ -13,9 +12,9 @@ const RequireDependencyParserPlugin = require('./RequireDependencyParserPlugin')
 const RequireDependency = require('./RequireDependency');
 const RequireItemDependency = require('./RequireItemDependency');
 const RequireContextDependency = require('./RequireContextDependency');
-const OpenUI5ResourceDependencyParserPlugin = require('./OpenUI5ResourceDependencyParserPlugin');
-const OpenUI5ResourceDependency = require('./OpenUI5ResourceDependency');
-const OpenUI5ResourceModuleFactory = require('./OpenUI5ResourceModuleFactory');
+const ResourceDependencyParserPlugin = require('./ResourceDependencyParserPlugin');
+const ResourceDependency = require('./ResourceDependency');
+const ResourceModuleFactory = require('./ResourceModuleFactory');
 const JQueryDependencyParserPlugin = require('./JQueryDependencyParserPlugin');
 const JQueryItemDependency = require('./JQueryItemDependency');
 const GlobalDependencyParserPlugin = require('./GlobalDependencyParserPlugin');
@@ -29,7 +28,7 @@ class OpenUI5Plugin {
   apply(compiler) {
     const { options } = this;
 
-    const resourceModuleFactory = new OpenUI5ResourceModuleFactory(compiler.resolverFactory);
+    const resourceModuleFactory = new ResourceModuleFactory(compiler.resolverFactory);
 
     compiler.hooks.compilation.tap('OpenUI5Plugin', (compilation, { normalModuleFactory, contextModuleFactory }) => {
       compilation.dependencyFactories.set(RequireDependency, new NullFactory());
@@ -47,8 +46,8 @@ class OpenUI5Plugin {
       compilation.dependencyFactories.set(JQueryItemDependency, normalModuleFactory);
       compilation.dependencyTemplates.set(JQueryItemDependency, new JQueryItemDependency.Template());
 
-      compilation.dependencyFactories.set(OpenUI5ResourceDependency, resourceModuleFactory);
-      compilation.dependencyTemplates.set(OpenUI5ResourceDependency, new OpenUI5ResourceDependency.Template());
+      compilation.dependencyFactories.set(ResourceDependency, resourceModuleFactory);
+      compilation.dependencyTemplates.set(ResourceDependency, new ResourceDependency.Template());
 
       compilation.dependencyFactories.set(OpenUI5ViewDependency, normalModuleFactory);
       compilation.dependencyTemplates.set(OpenUI5ViewDependency, new OpenUI5ViewDependency.Template());
@@ -68,7 +67,7 @@ class OpenUI5Plugin {
         new JQueryDependencyParserPlugin().apply(parser);
         new GlobalDependencyParserPlugin().apply(parser);
         new ViewDependencyParserPlugin(options).apply(parser);
-        new OpenUI5ResourceDependencyParserPlugin(options).apply(parser);
+        new ResourceDependencyParserPlugin(options).apply(parser);
       });
     });
 

@@ -1,9 +1,9 @@
 const async = require('async');
 const Tapable = require('tapable').Tapable;
 const AsyncSeriesWaterfallHook = require('tapable').AsyncSeriesWaterfallHook;
-const OpenUI5ResourceModule = require('./OpenUI5ResourceModule');
+const ResourceModule = require('./ResourceModule');
 
-class OpenUI5ResourceModuleFactory extends Tapable {
+class ResourceModuleFactory extends Tapable {
   constructor(resolverFactory) {
     super();
     this.hooks = {
@@ -81,11 +81,11 @@ class OpenUI5ResourceModuleFactory extends Tapable {
           // Ignored
           if (!result) return callback();
 
-          return callback(null, new OpenUI5ResourceModule(result));
+          return callback(null, new ResourceModule(result));
         });
       });
     });
   }
 }
 
-module.exports = OpenUI5ResourceModuleFactory;
+module.exports = ResourceModuleFactory;
