@@ -78,9 +78,6 @@ class OpenUI5Plugin {
           const builder = new lessOpenUI5.Builder();
           const promises = [];
 
-          const chunk = new Chunk('openui5_theme');
-          chunk.ids = [];
-
           let themes = options.theme;
           if (!Array.isArray(themes)) {
             themes = [themes];
@@ -100,7 +97,6 @@ class OpenUI5Plugin {
               }).then((result) => {
                 const file = `${libPath}/library.css`;
                 compilation.assets[file] = new OriginalSource(result.css, file);
-                chunk.files.push(file);
               })).catch(callback);
 
               promises.push(promise);
@@ -108,7 +104,6 @@ class OpenUI5Plugin {
           }
 
           Promise.all(promises).then(() => {
-            compilation.chunks.push(chunk);
             callback();
           }).catch(callback);
         });
