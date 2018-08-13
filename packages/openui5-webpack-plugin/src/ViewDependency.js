@@ -1,7 +1,7 @@
 const ModuleDependency = require('webpack/lib/dependencies/ModuleDependency');
 const WebpackMissingModule = require('webpack/lib/dependencies/WebpackMissingModule');
 
-class OpenUI5ViewDependency extends ModuleDependency {
+class ViewDependency extends ModuleDependency {
   constructor(request, object, range) {
     super(request);
     this.range = range;
@@ -13,7 +13,7 @@ class OpenUI5ViewDependency extends ModuleDependency {
   }
 }
 
-OpenUI5ViewDependency.Template = class OpenUI5ViewDependencyTemplate {
+ViewDependency.Template = class ViewDependencyTemplate {
   apply(dep, source, outputOptions, requestShortener) {
     if (!dep.range) return;
     const comment = outputOptions.pathinfo ? `/*! ${requestShortener.shorten(dep.request)} */ ` : '';
@@ -27,4 +27,4 @@ OpenUI5ViewDependency.Template = class OpenUI5ViewDependencyTemplate {
   }
 };
 
-module.exports = OpenUI5ViewDependency;
+module.exports = ViewDependency;

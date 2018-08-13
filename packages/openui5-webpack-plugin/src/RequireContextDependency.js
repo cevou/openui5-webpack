@@ -1,7 +1,7 @@
 const ContextDependency = require('webpack/lib/dependencies/ContextDependency');
 const ContextDependencyTemplateAsRequireCall = require('webpack/lib/dependencies/ContextDependencyTemplateAsRequireCall');
 
-class OpenUI5RequireContextDependency extends ContextDependency {
+class RequireContextDependency extends ContextDependency {
   constructor(options, range, valueRange) {
     super(options);
     this.range = range;
@@ -13,6 +13,6 @@ class OpenUI5RequireContextDependency extends ContextDependency {
   }
 }
 
-OpenUI5RequireContextDependency.Template = ContextDependencyTemplateAsRequireCall;
+RequireContextDependency.Template = ContextDependencyTemplateAsRequireCall;
 
-module.exports = OpenUI5RequireContextDependency;
+module.exports = RequireContextDependency;

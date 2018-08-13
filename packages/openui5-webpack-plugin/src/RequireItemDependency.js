@@ -1,7 +1,7 @@
 const ModuleDependency = require('webpack/lib/dependencies/ModuleDependency');
 const ModuleDependencyTemplateAsRequireId = require('./ModuleDependencyTemplateAsRequireId');
 
-class OpenUI5RequireItemDependency extends ModuleDependency {
+class RequireItemDependency extends ModuleDependency {
   constructor(request, range, brackets) {
     super(request);
     this.range = range;
@@ -9,10 +9,10 @@ class OpenUI5RequireItemDependency extends ModuleDependency {
   }
 
   get type() {
-    return 'openui5 require';
+    return 'openui5 require item';
   }
 }
 
-OpenUI5RequireItemDependency.Template = ModuleDependencyTemplateAsRequireId;
+RequireItemDependency.Template = ModuleDependencyTemplateAsRequireId;
 
-module.exports = OpenUI5RequireItemDependency;
+module.exports = RequireItemDependency;

@@ -1,15 +1,15 @@
 const LocalModulesHelpers = require('webpack/lib/dependencies/LocalModulesHelpers');
 const LocalModuleDependency = require('webpack/lib/dependencies/LocalModuleDependency');
-const OpenUI5DefineDependency = require('./OpenUI5DefineDependency');
-const OpenUI5RequireItemDependency = require('./OpenUI5RequireItemDependency');
+const DefineDependency = require('./DefineDependency');
+const RequireItemDependency = require('./RequireItemDependency');
 
-class OpenUI5DefineDependencyParserPlugin {
+class DefineDependencyParserPlugin {
   constructor(options) {
     this.options = options;
   }
 
   newDefineDependency(range, arrayRange, functionRange, namedModule) {
-    return new OpenUI5DefineDependency(range, arrayRange, functionRange, namedModule);
+    return new DefineDependency(range, arrayRange, functionRange, namedModule);
   }
 
   apply(parser) {
@@ -19,7 +19,7 @@ class OpenUI5DefineDependencyParserPlugin {
       if (localModule) {
         dep = new LocalModuleDependency(localModule, param.range);
       } else {
-        dep = new OpenUI5RequireItemDependency(param.string, param.range);
+        dep = new RequireItemDependency(param.string, param.range);
       }
       dep.loc = expr.loc;
       parser.state.current.addDependency(dep);
@@ -99,4 +99,4 @@ class OpenUI5DefineDependencyParserPlugin {
     });
   }
 }
-module.exports = OpenUI5DefineDependencyParserPlugin;
+module.exports = DefineDependencyParserPlugin;

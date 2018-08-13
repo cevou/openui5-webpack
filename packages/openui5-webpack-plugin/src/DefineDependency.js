@@ -1,6 +1,6 @@
 const NullDependency = require('webpack/lib/dependencies/NullDependency');
 
-class OpenUI5DefineDependency extends NullDependency {
+class DefineDependency extends NullDependency {
   constructor(range, arrayRange, functionRange, namedModule) {
     super();
     this.range = range;
@@ -14,7 +14,7 @@ class OpenUI5DefineDependency extends NullDependency {
   }
 }
 
-OpenUI5DefineDependency.Template = class UI5DefineDependencyTemplate {
+DefineDependency.Template = class UI5DefineDependencyTemplate {
   get definitions() {
     return {
       f: [
@@ -89,4 +89,4 @@ OpenUI5DefineDependency.Template = class UI5DefineDependencyTemplate {
   }
 };
 
-module.exports = OpenUI5DefineDependency;
+module.exports = DefineDependency;
