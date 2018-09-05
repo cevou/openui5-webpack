@@ -37,6 +37,6 @@
     "jest": "^23.5.0"
   },
   "peerDependencies": {
-    "openui5-webpack-plugin": "^0.2.0"
+    "openui5-webpack-plugin": "^0.3.0"
   }
 }
