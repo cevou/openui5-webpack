@@ -1,3 +1,6 @@
+const RequireContextDependency = require('./RequireContextDependency');
+const RequireDynamicContextDependency = require('./RequireDynamicContextDependency');
+
 const ContextDependencyHelpers = exports;
 
 /**
@@ -9,7 +12,7 @@ function quotemeta(str) {
   return str.replace(/[-[\]\\/{}()*+?.^$|]/g, '\\$&');
 }
 
-ContextDependencyHelpers.create = function (Dep, range, param, expr, options, contextOptions) {
+ContextDependencyHelpers.create = function (range, param, expr, options, contextOptions) {
   if (param.isWrapped() && (param.prefix && param.prefix.isString())) {
     let prefix = param.prefix.string;
     const prefixRange = param.prefix.range;
@@ -21,7 +24,7 @@ ContextDependencyHelpers.create = function (Dep, range, param, expr, options, co
       prefix = `.${prefix.substr(idx)}`;
     }
     const regExp = new RegExp(`^${quotemeta(prefix)}.*$`);
-    const dep = new Dep(Object.assign({
+    const dep = new RequireContextDependency(Object.assign({
       request: context,
       recursive: options.wrappedContextRecursive,
       regExp,
@@ -32,7 +35,11 @@ ContextDependencyHelpers.create = function (Dep, range, param, expr, options, co
     dep.critical = options.wrappedContextCritical && 'a part of the request of a dependency is an expression';
     return dep;
   }
-  return null;
+
+  // if there is no prefix we use the custom dynamic module which contains all ui5 resources
+  const dep = new RequireDynamicContextDependency(range, param.range);
+
+  return dep;
 };
 
 ContextDependencyHelpers.createView = function (Dep, range, param, expr, options, contextOptions) {

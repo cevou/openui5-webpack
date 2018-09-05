@@ -52,24 +52,14 @@ module.exports = function (source) {
     });
     processNodes(view);
     let requires = '';
-    let objects = '';
     Object.keys(controls).forEach((name) => {
       const path = replaceModulePaths(name);
       this.addDependency(path);
-      requires += `"${name}.js": function(){require("${path}")},\n`;
-      objects += `jQuery.sap.setObject("${name.replace(/\//g, '.')}", require("${path}"));\n`;
+      requires += `sap.ui.requireSync("${path}");\n`;
     });
 
     const output = `
-      var jQuery = require('jquery.sap.global');
-      jQuery.sap.registerPreloadedModules({
-        version: "2.0",
-        url: '.',
-        modules: {
-          ${requires}
-        }
-      });
-      ${objects}
+      ${requires}
       var parser = new DOMParser();
       var xml = parser.parseFromString(${JSON.stringify(source)}, "text/xml");
       module.exports = xml;

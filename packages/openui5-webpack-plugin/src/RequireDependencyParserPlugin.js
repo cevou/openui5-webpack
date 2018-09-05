@@ -1,6 +1,5 @@
 const RequireDependenciesBlock = require('./RequireDependenciesBlock');
 const RequireItemDependency = require('./RequireItemDependency');
-const RequireContextDependency = require('./RequireContextDependency');
 const ContextDependencyHelpers = require('./ContextDependencyHelpers');
 
 class RequireDependencyParserPlugin {
@@ -27,7 +26,7 @@ class RequireDependencyParserPlugin {
     };
 
     const processContext = (expr, param) => {
-      const dep = ContextDependencyHelpers.create(RequireContextDependency, expr.range, param, expr, options);
+      const dep = ContextDependencyHelpers.create(expr.range, param, expr, options);
       if (!dep) return false;
       dep.loc = expr.loc;
       dep.optional = !!parser.scope.inTry;

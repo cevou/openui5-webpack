@@ -7,11 +7,13 @@ const ConstDependency = require('webpack/lib/dependencies/ConstDependency');
 const ContextElementDependency = require('webpack/lib/dependencies/ContextElementDependency');
 const DefineDependency = require('./DefineDependency');
 const DefineDependencyParserPlugin = require('./DefineDependencyParserPlugin');
+const DynamicContextModuleFactory = require('./DynamicContextModuleFactory');
 const OpenUI5ViewDependency = require('./ViewDependency');
 const RequireDependencyParserPlugin = require('./RequireDependencyParserPlugin');
 const RequireDependency = require('./RequireDependency');
 const RequireItemDependency = require('./RequireItemDependency');
 const RequireContextDependency = require('./RequireContextDependency');
+const RequireDynamicContextDependency = require('./RequireDynamicContextDependency');
 const ResourceDependencyParserPlugin = require('./ResourceDependencyParserPlugin');
 const ResourceDependency = require('./ResourceDependency');
 const ResourceModuleFactory = require('./ResourceModuleFactory');
@@ -29,6 +31,7 @@ class OpenUI5Plugin {
     const { options } = this;
 
     const resourceModuleFactory = new ResourceModuleFactory(compiler.resolverFactory);
+    const dynamicContextModuleFactory = new DynamicContextModuleFactory(options.requireSync);
 
     compiler.hooks.compilation.tap('OpenUI5Plugin', (compilation, { normalModuleFactory, contextModuleFactory }) => {
       compilation.dependencyFactories.set(RequireDependency, new NullFactory());
@@ -39,6 +42,9 @@ class OpenUI5Plugin {
 
       compilation.dependencyFactories.set(RequireContextDependency, contextModuleFactory);
       compilation.dependencyTemplates.set(RequireContextDependency, new RequireContextDependency.Template());
+
+      compilation.dependencyFactories.set(RequireDynamicContextDependency, dynamicContextModuleFactory);
+      compilation.dependencyTemplates.set(RequireDynamicContextDependency, new RequireDynamicContextDependency.Template());
 
       compilation.dependencyFactories.set(DefineDependency, new NullFactory());
       compilation.dependencyTemplates.set(DefineDependency, new DefineDependency.Template());

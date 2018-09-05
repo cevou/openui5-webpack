@@ -253,6 +253,43 @@ webpackContext.id = 2;
 ],[[1,1]]]);"
 `;
 
+exports[`Integration TestCases require-dynamic-context 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+\\"use strict\\";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_a__WEBPACK_IMPORTED_MODULE_0__);
+
+const a = './a';
+__webpack_require__(2)(a);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = 'test';
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+function webpackEmptyContext(req) {
+  throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = 2;
+
+/***/ })
+],[[0,1]]]);"
+`;
+
 exports[`Integration TestCases require-item 1`] = `
 "(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
 /* 0 */

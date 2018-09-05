@@ -2,16 +2,7 @@
 
 exports[`XML Loader should handle a fragment 1`] = `
 "
-      var jQuery = require('jquery.sap.global');
-      jQuery.sap.registerPreloadedModules({
-        version: \\"2.0\\",
-        url: '.',
-        modules: {
-          \\"sap/m/Button.js\\": function(){require(\\"sap/m/Button\\")},
-
-        }
-      });
-      jQuery.sap.setObject(\\"sap.m.Button\\", require(\\"sap/m/Button\\"));
+      sap.ui.requireSync(\\"sap/m/Button\\");
 
       var parser = new DOMParser();
       var xml = parser.parseFromString(\\"<core:FragmentDefinition xmlns:core=\\\\\\"sap.ui.core\\\\\\" xmlns=\\\\\\"sap.m\\\\\\"><Button/></core:FragmentDefinition>\\", \\"text/xml\\");
@@ -21,16 +12,7 @@ exports[`XML Loader should handle a fragment 1`] = `
 
 exports[`XML Loader should handle custom name for root element in view 1`] = `
 "
-      var jQuery = require('jquery.sap.global');
-      jQuery.sap.registerPreloadedModules({
-        version: \\"2.0\\",
-        url: '.',
-        modules: {
-          \\"sap/m/Button.js\\": function(){require(\\"sap/m/Button\\")},
-
-        }
-      });
-      jQuery.sap.setObject(\\"sap.m.Button\\", require(\\"sap/m/Button\\"));
+      sap.ui.requireSync(\\"sap/m/Button\\");
 
       var parser = new DOMParser();
       var xml = parser.parseFromString(\\"<m:View xmlns:m=\\\\\\"sap.ui.core.mvc\\\\\\" xmlns=\\\\\\"sap.m\\\\\\"><Button /></m:View>\\", \\"text/xml\\");
@@ -40,16 +22,7 @@ exports[`XML Loader should handle custom name for root element in view 1`] = `
 
 exports[`XML Loader should handle custom rootPaths 1`] = `
 "
-      var jQuery = require('jquery.sap.global');
-      jQuery.sap.registerPreloadedModules({
-        version: \\"2.0\\",
-        url: '.',
-        modules: {
-          \\"my/custom/namespace/TestControl.js\\": function(){require(\\"./fixtures/custom/TestControl\\")},
-
-        }
-      });
-      jQuery.sap.setObject(\\"my.custom.namespace.TestControl\\", require(\\"./fixtures/custom/TestControl\\"));
+      sap.ui.requireSync(\\"./fixtures/custom/TestControl\\");
 
       var parser = new DOMParser();
       var xml = parser.parseFromString(\\"<mvc:View xmlns:mvc=\\\\\\"sap.ui.core.mvc\\\\\\" xmlns:c=\\\\\\"my.custom.namespace\\\\\\">\\\\n  <c:TestControl />\\\\n</mvc:View>\\", \\"text/xml\\");

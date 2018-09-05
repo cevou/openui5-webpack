@@ -2,23 +2,23 @@
   "private": true,
   "name": "openui5-webpack",
   "scripts": {
-    "postinstall": "lerna bootstrap --stream",
+    "postinstall": "lerna bootstrap",
     "publish": "lerna publish",
     "test": "lerna run test",
     "lint": "eslint . --cache",
     "prepublish": "npm run build",
-    "build": "lerna run build --stream"
+    "build": "lerna run build"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "chalk": "^2.4.1",
-    "coveralls": "^3.0.1",
-    "eslint": "^4.19.1",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.5.0",
     "eslint-config-webpack": "^1.2.5",
-    "eslint-plugin-import": "^2.12.0",
-    "lerna": "^2.11.0",
-    "nyc": "^12.0.2"
+    "eslint-plugin-import": "^2.14.0",
+    "lerna": "^3.2.1",
+    "nyc": "^13.0.1"
   },
   "eslintConfig": {
     "extends": [
