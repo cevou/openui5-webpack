@@ -1,7 +1,7 @@
 {
   "name": "openui5-xml-loader",
   "description": "Load XML views in webpack builds",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "author": "Christoph Kraemer <chr.kraemer@sap.com>",
   "keywords": [
