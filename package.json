@@ -14,11 +14,11 @@
     "babel-preset-env": "^1.7.0",
     "chalk": "^2.4.1",
     "coveralls": "^3.0.2",
-    "eslint": "^5.5.0",
+    "eslint": "^5.8.0",
     "eslint-config-webpack": "^1.2.5",
     "eslint-plugin-import": "^2.14.0",
-    "lerna": "^3.2.1",
-    "nyc": "^13.0.1"
+    "lerna": "^3.4.3",
+    "nyc": "^13.1.0"
   },
   "eslintConfig": {
     "extends": [

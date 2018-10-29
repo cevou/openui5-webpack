@@ -4,6 +4,7 @@ node_js:
   - "6"
   - "8"
   - "10"
+  - "11"
 cache:
   directories:
     - packages/babel-plugin-openui5-remove-support/node_modules
