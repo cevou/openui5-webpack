@@ -25,6 +25,7 @@ class DynamicContextModule extends Module {
     this.dependencies = requireSync.map((require) => {
       const dep = new ContextElementDependency(require);
       dep.optional = true;
+      dep.weak = true;
       return dep;
     });
 
