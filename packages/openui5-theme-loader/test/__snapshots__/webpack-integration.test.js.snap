@@ -1,49 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Integration TestCases add-dependency 1`] = `
-"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+const Control = __webpack_require__(1);
+const Control2 = __webpack_require__(3);
+const Control3 = __webpack_require__(5);
 
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(2);
 
 
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(3);
+__webpack_require__(4);
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
 
 
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-const Control = __webpack_require__(4);
-const Control2 = __webpack_require__(2);
-const Control3 = __webpack_require__(0);
 
 
 /***/ })
-],[[5,0]]]);"
+],[[0,1]]]);"
 `;
