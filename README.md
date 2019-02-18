@@ -31,10 +31,6 @@ to the control, so that the renderer is included in the build.
 
 This loader parses XML views and adds all controls used in XML views as dependency.
 
-### babel-plugin-openui5-remove-support
-
-Remove static dependency to support modules.
-
 <h2 align="center">Install</h2>
 
 Please check the `README.md` files of the sub packages to find out more about how to install and configure the 
