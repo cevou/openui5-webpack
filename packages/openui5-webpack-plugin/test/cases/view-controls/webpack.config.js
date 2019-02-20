@@ -6,6 +6,14 @@ module.exports = {
   entry: {
     build: './index.js',
   },
+  module: {
+    rules: [
+      {
+        test: /\.xml$/,
+        use: 'openui5-xml-loader',
+      },
+    ],
+  },
   plugins: [
     new OpenUI5Plugin(),
   ],

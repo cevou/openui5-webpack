@@ -6,14 +6,6 @@ module.exports = {
   entry: {
     build: './index.js',
   },
-  module: {
-    rules: [
-      {
-        test: /\.xml$/,
-        use: 'xml-loader',
-      },
-    ],
-  },
   plugins: [
     new OpenUI5Plugin({
       modulePath: "sap/ui/test",

@@ -10,14 +10,6 @@ module.exports = {
   entry: {
     build: './index.js',
   },
-  module: {
-    rules: [
-      {
-        test: /\.xml$/,
-        use: 'xml-loader',
-      },
-    ],
-  },
   resolve: {
     "modules": [
       "library1",

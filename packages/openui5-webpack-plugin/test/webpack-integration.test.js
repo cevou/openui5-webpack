@@ -17,7 +17,7 @@ describe('Integration TestCases', () => {
           rules: [
             {
               test: /\.xml$/,
-              use: 'xml-loader',
+              use: 'openui5-xml-loader',
             },
           ],
         },

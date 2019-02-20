@@ -7,6 +7,7 @@ const ConstDependency = require('webpack/lib/dependencies/ConstDependency');
 const ContextElementDependency = require('webpack/lib/dependencies/ContextElementDependency');
 const DefineDependency = require('./DefineDependency');
 const DefineDependencyParserPlugin = require('./DefineDependencyParserPlugin');
+const DynamicContextModule = require('./DynamicContextModule');
 const DynamicContextModuleFactory = require('./DynamicContextModuleFactory');
 const OpenUI5ViewDependency = require('./ViewDependency');
 const RequireDependencyParserPlugin = require('./RequireDependencyParserPlugin');
@@ -74,6 +75,31 @@ class OpenUI5Plugin {
         new GlobalDependencyParserPlugin().apply(parser);
         new ViewDependencyParserPlugin(options).apply(parser);
         new ResourceDependencyParserPlugin(options).apply(parser);
+      });
+
+      compilation.hooks.optimizeTree.tapAsync('OpenUI5Plugin', (chunks, modules, callback) => {
+        let dynamicContextModule;
+        let dependencies = [];
+        for (const module of modules) {
+          if (module instanceof DynamicContextModule) {
+            dynamicContextModule = module;
+            continue;
+          }
+          if (module.loaders && module.loaders.filter(loader => loader.loader.indexOf("openui5-xml-loader") > -1).length > 0) {
+            dependencies = [...dependencies, ...module.dependencies];
+          }
+        }
+        if (dynamicContextModule) {
+          dynamicContextModule.addViewDependencies(dependencies);
+          compilation.rebuildModule(dynamicContextModule, (err) => {
+            if (err) {
+              compilation.errors.push(err);
+            }
+            callback();
+          })
+        } else {
+          callback();
+        }
       });
     });
 

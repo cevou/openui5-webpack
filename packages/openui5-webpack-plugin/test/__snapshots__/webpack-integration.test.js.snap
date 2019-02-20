@@ -433,11 +433,11 @@ __webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	\\"./a.xml\\": 2,
-	\\"./sap/m/messagebundle.properties\\": 6,
-	\\"./sap/ui/core/messagebundle.properties\\": 4,
-	\\"./sap/ui/core/messagebundle_en.properties\\": 5,
-	\\"sap/ui/core/cldr/en.json\\": 3
+	\\"./a.xml\\": 6,
+	\\"./sap/m/messagebundle.properties\\": 5,
+	\\"./sap/ui/core/messagebundle.properties\\": 3,
+	\\"./sap/ui/core/messagebundle_en.properties\\": 4,
+	\\"sap/ui/core/cldr/en.json\\": 2
 };
 function openui5Resource(req, failOnError) {
   var id = openui5ResourceResolve(req, failOnError);
@@ -621,6 +621,80 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 webpackContext.id = 1;
 module.exports = webpackContext;
+
+/***/ })
+],[[0,1]]]);"
+`;
+
+exports[`Integration TestCases view-controls 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+new (__webpack_require__(1))(undefined);
+
+const a = './a';
+__webpack_require__(4)(a);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+      __webpack_require__(2);
+__webpack_require__(3);
+
+      var parser = new DOMParser();
+      var xml = parser.parseFromString(\\"<mvc:View xmlns:mvc=\\\\\\"sap.ui.core.mvc\\\\\\" xmlns=\\\\\\"sap.m\\\\\\">\\\\n  <Button />\\\\n  <Text />\\\\n  <Button />\\\\n</mvc:View>\\\\n\\", \\"text/xml\\");
+      module.exports = xml;
+    
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"sap/m/Button\\": 2,
+	\\"sap/m/Text\\": 3
+};
+function openui5DynamicDep(req, failOnError) {
+  var id = openui5DynamicDepResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5DynamicDepResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5DynamicDep.keys = function openui5DynamicDepKeys() {
+  return Object.keys(map);
+};
+openui5DynamicDep.resolve = openui5DynamicDepResolve;
+openui5DynamicDep.id = 4;
+module.exports = openui5DynamicDep;
 
 /***/ })
 ],[[0,1]]]);"

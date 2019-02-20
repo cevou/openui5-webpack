@@ -7,6 +7,7 @@ class DynamicContextModule extends Module {
   constructor(options) {
     super('javascript/dynamic');
     this.options = options || {};
+    this.viewDependencies = [];
   }
 
   identifier() {
@@ -21,8 +22,9 @@ class DynamicContextModule extends Module {
     };
 
     const requireSync = this.options.requireSync || [];
+    const dependencies = [...requireSync, ...this.viewDependencies];
 
-    this.dependencies = requireSync.map((require) => {
+    this.dependencies = dependencies.map((require) => {
       const dep = new ContextElementDependency(require);
       dep.optional = true;
       dep.weak = true;
@@ -34,6 +36,10 @@ class DynamicContextModule extends Module {
 
   readableIdentifier() {
     return `openui5 dynamic context`;
+  }
+
+  addViewDependencies(dependencies) {
+    this.viewDependencies = dependencies.map((dependency) => dependency.request);
   }
 
   getUserRequestMap(dependencies) {
