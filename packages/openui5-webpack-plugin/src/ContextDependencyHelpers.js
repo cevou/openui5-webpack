@@ -56,7 +56,7 @@ ContextDependencyHelpers.createView = function (Dep, range, param, expr, options
   dep.critical = options.wrappedContextCritical && 'a part of the request of a dependency is an expression';
   dep.replaces = [
     {
-      range: [dep.valueRange[0] - 1, dep.valueRange[0] - 1],
+      range: [dep.range[0], dep.valueRange[0] - 1],
       value: 'new (',
     },
     {
