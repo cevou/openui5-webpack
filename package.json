@@ -10,8 +10,6 @@
     "build": "lerna run build"
   },
   "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "chalk": "^2.4.2",
     "coveralls": "^3.0.2",
     "eslint": "^5.14.1",

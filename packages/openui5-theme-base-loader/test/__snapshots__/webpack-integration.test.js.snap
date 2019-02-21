@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Integration TestCases add-dependency 1`] = `
-"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],[
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(1);
 
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-__webpack_require__(0);
 
 
 /***/ })
-],[[1,0]]]);"
+],[[0,1]]]);"
 `;

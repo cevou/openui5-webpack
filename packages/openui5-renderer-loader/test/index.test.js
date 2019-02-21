@@ -1,4 +1,3 @@
-import path from 'path';
 import loader from '../src/index';
 
 describe('Renderer Loader', () => {
