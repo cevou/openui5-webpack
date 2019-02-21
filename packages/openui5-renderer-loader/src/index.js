@@ -2,7 +2,7 @@ import loaderUtils from 'loader-utils';
 
 module.exports = function (source) {
   const defaultOptions = {
-    filterRegEx: /[/\\]resources[/\\](.*)\.js$/,
+    filterRegEx: /[/\\]src[/\\](.*)\.js$/,
   };
 
   const options = Object.assign(
