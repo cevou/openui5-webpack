@@ -25,8 +25,8 @@ class RequireDependencyParserPlugin {
       return false;
     };
 
-    const processContext = (expr, param) => {
-      const dep = ContextDependencyHelpers.create(expr.range, param, expr, options);
+    const processContext = (expr, param, inArray) => {
+      const dep = ContextDependencyHelpers.create(expr.range, param, expr, options, { inArray });
       if (!dep) return false;
       dep.loc = expr.loc;
       dep.optional = !!parser.scope.inTry;
@@ -47,19 +47,23 @@ class RequireDependencyParserPlugin {
         const module = expr.arguments[0];
         const param = parser.evaluateExpression(module);
         return processItem(expr, param, expr.range)
-      } else if (expr.arguments[0].type === 'ArrayExpression') {
+      } else if (expr.arguments[0].type === 'ArrayExpression' || expr.arguments[0].type === 'CallExpression') {
         // Async loading of module and optionally execution of callback function
-        const array = expr.arguments[0];
-        const param = parser.evaluateExpression(array);
+        const arg0 = expr.arguments[0];
+        const param = parser.evaluateExpression(arg0);
         const fn = expr.arguments[1];
 
-        const dependenciesItems = param ? param.items : [param];
-        const dep = new RequireDependenciesBlock(expr, array.range, fn ? fn.range : null, parser.state.module, expr.loc, dependenciesItems[0].string);
+        const dep = new RequireDependenciesBlock(expr, arg0, fn ? fn.range : null, parser.state.module, expr.loc);
         const old = parser.state.current;
         parser.state.current = dep;
 
         try {
-          const result = processArray(expr, param);
+          let result;
+          if (arg0.type === 'ArrayExpression') {
+            result = processArray(expr, param);
+          } else {
+            result = processContext(expr, param, true);
+          }
           if (!result) {
             return;
           }

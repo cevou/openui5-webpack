@@ -203,6 +203,24 @@ __webpack_require__.e(/* openui5 require */ 0).then(function() { var __WEBPACK_U
 },[[2,2]]]);"
 `;
 
+exports[`Integration TestCases require-call 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+function test() {
+  return \\"./a\\"
+}
+
+__webpack_require__.e(/* openui5 require */ 2).then(function() { var __WEBPACK_UI5_REQUIRE_ARRAY__ = test().map(function(item) { return __webpack_require__(2)(item, true); }); (function(a) {
+  const c = a;
+}).apply(null, __WEBPACK_UI5_REQUIRE_ARRAY__);}).catch(__webpack_require__.oe);
+
+
+/***/ })
+],[[0,1]]]);"
+`;
+
 exports[`Integration TestCases require-context 1`] = `
 "(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
 /* 0 */
