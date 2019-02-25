@@ -36,7 +36,10 @@ class RequireDependencyParserPlugin {
 
     const processArray = (expr, param) => {
       param.items.forEach((param) => {
-        processItem(expr, param, param.range);
+        const result = processItem(expr, param, param.range);
+        if (!result) {
+          processContext(param, param);
+        }
       });
       return true;
     };
