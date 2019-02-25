@@ -1,7 +1,7 @@
 {
   "name": "openui5-renderer-loader",
   "description": "Add renderer dependencies to UI5 controls in webpack build",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "Apache-2.0",
   "author": "Christoph Kraemer <chr.kraemer@sap.com>",
   "keywords": [
