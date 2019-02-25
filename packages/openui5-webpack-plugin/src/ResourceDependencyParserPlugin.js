@@ -52,6 +52,7 @@ class ResourceDependencyParserPlugin {
         libraries,
         translations,
         foe ? foe.bool : true,
+        false,
         expr.range,
         param.range,
       );
@@ -66,11 +67,14 @@ class ResourceDependencyParserPlugin {
       const extensions = resources.extensions || ['properties', 'xml'];
       const translations = options.translations || [];
       const libraries = options.libs || [];
-      const arg = expr.arguments[0];
+      const arg1 = expr.arguments[0];
+      const arg2 = expr.arguments[1];
 
       let param;
-      let foe;
-      if (arg.type === 'ObjectExpression') {
+      let arg;
+      if (arg1.type === 'ObjectExpression') {
+        arg = arg1;
+
         const property = arg.properties.find((prop) => {
           if (prop.key && prop.key.type === 'Identifier' && prop.key.name === 'url') {
             return true;
@@ -82,6 +86,15 @@ class ResourceDependencyParserPlugin {
           throw new Error('Property url missing in object for jQuery.sap.loadResource');
         }
 
+        param = parser.evaluateExpression(property.value);
+      } else {
+        arg = arg2;
+        param = parser.evaluateExpression(arg1);
+      }
+
+      let async;
+      let foe;
+      if (arg && arg.type === 'ObjectExpression') {
         const failOnError = arg.properties.find((prop) => {
           if (prop.key && prop.key.type === 'Identifier' && prop.key.name === 'failOnError') {
             return true;
@@ -89,12 +102,19 @@ class ResourceDependencyParserPlugin {
           return false;
         });
 
-        param = parser.evaluateExpression(property.value);
+        const asyncLoading = arg.properties.find((prop) => {
+          if (prop.key && prop.key.type === 'Identifier' && prop.key.name === 'async') {
+            return true;
+          }
+          return false;
+        });
+
         if (failOnError) {
           foe = parser.evaluateExpression(failOnError.value);
         }
-      } else {
-        param = parser.evaluateExpression(arg);
+        if (asyncLoading) {
+          async = parser.evaluateExpression(asyncLoading.value);
+        }
       }
 
       const dep = new ResourceDependency(
@@ -104,11 +124,14 @@ class ResourceDependencyParserPlugin {
         libraries,
         translations,
         foe ? foe.bool : true,
+        async ? async.bool : false,
         expr.range,
         param.range,
       );
+
       dep.loc = expr.loc;
       parser.state.current.addDependency(dep);
+
       return true;
     });
   }

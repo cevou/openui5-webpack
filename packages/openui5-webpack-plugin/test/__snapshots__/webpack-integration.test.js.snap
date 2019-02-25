@@ -185,6 +185,144 @@ console.warn(\\"UI5 tried to dynamically require a module. If it doesn't exist i
 ],[[0,1]]]);"
 `;
 
+exports[`Integration TestCases loader-extension 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'a.xml';
+__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./a.xml\\": 2
+};
+function openui5Resource(req, failOnError) {
+  var id = openui5ResourceResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5ResourceResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5Resource.keys = function openui5ResourceKeys() {
+  return Object.keys(map);
+};
+openui5Resource.resolve = openui5ResourceResolve;
+openui5Resource.id = 1;
+module.exports = openui5Resource;
+
+/***/ })
+],[[0,1]]]);"
+`;
+
+exports[`Integration TestCases loader-extension-async 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'a.xml';
+Promise.resolve().then(function() { return __webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true); });
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./a.xml\\": 2
+};
+function openui5Resource(req, failOnError) {
+  var id = openui5ResourceResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5ResourceResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5Resource.keys = function openui5ResourceKeys() {
+  return Object.keys(map);
+};
+openui5Resource.resolve = openui5ResourceResolve;
+openui5Resource.id = 1;
+module.exports = openui5Resource;
+
+/***/ })
+],[[0,1]]]);"
+`;
+
+exports[`Integration TestCases loader-extension-object 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'a.xml';
+__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./a.xml\\": 2
+};
+function openui5Resource(req, failOnError) {
+  var id = openui5ResourceResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5ResourceResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5Resource.keys = function openui5ResourceKeys() {
+  return Object.keys(map);
+};
+openui5Resource.resolve = openui5ResourceResolve;
+openui5Resource.id = 1;
+module.exports = openui5Resource;
+
+/***/ })
+],[[0,1]]]);"
+`;
+
 exports[`Integration TestCases require-array 1`] = `
 "(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],{
 
@@ -302,6 +440,53 @@ webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
 webpackEmptyContext.id = 2;
+
+/***/ })
+],[[0,1]]]);"
+`;
+
+exports[`Integration TestCases require-dynamic-context-async 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],[
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = './a';
+__webpack_require__(2)(a);
+
+
+/***/ }),
+/* 1 */,
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	\\"./a\\": 1
+};
+function openui5DynamicDep(req, failOnError) {
+  var id = openui5DynamicDepResolve(req, failOnError);
+  if (id === null) {
+    return null;
+  }
+  if(!__webpack_require__.m[id])
+    throw new Error(\\"Module '\\" + req + \\"' ('\\" + id + \\"') is not available (weak dependency)\\");
+  return __webpack_require__(id);
+};
+function openui5DynamicDepResolve(req, failOnError) {
+  var id = map[req];
+  if(!(id + 1)) { // check for number or string
+    if (failOnError) {
+      throw new Error(\\"Cannot find module '\\" + req + \\"'.\\");
+    }
+    return null;
+  }
+  return id;
+};
+openui5DynamicDep.keys = function openui5DynamicDepKeys() {
+  return Object.keys(map);
+};
+openui5DynamicDep.resolve = openui5DynamicDepResolve;
+openui5DynamicDep.id = 2;
+module.exports = openui5DynamicDep;
 
 /***/ })
 ],[[0,1]]]);"

@@ -37,7 +37,7 @@ ContextDependencyHelpers.create = function (range, param, expr, options, context
   }
 
   // if there is no prefix we use the custom dynamic module which contains all ui5 resources
-  const dep = new RequireDynamicContextDependency(range, param.range, contextOptions.inArray);
+  const dep = new RequireDynamicContextDependency(range, param.range, contextOptions && contextOptions.inArray);
 
   return dep;
 };

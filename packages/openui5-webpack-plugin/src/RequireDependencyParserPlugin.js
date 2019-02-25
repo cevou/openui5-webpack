@@ -46,8 +46,12 @@ class RequireDependencyParserPlugin {
         // Synchronous retrieval of module only one string argument
         const module = expr.arguments[0];
         const param = parser.evaluateExpression(module);
-        return processItem(expr, param, expr.range)
-      } else if (expr.arguments[0].type === 'ArrayExpression' || expr.arguments[0].type === 'CallExpression') {
+        return processItem(expr, param, expr.range);
+      } else if (!expr.arguments[1] && (expr.arguments[0].type === 'CallExpression' || expr.arguments[0].type === 'Identifier')) {
+        // only one parameter and variable ==> context dependency
+        const param = parser.evaluateExpression(expr.arguments[0]);
+        return processContext(expr, param);
+      } else if (expr.arguments[0].type === 'ArrayExpression' || expr.arguments[0].type === 'CallExpression' || expr.arguments[0].type === 'Identifier') {
         // Async loading of module and optionally execution of callback function
         const arg0 = expr.arguments[0];
         const param = parser.evaluateExpression(arg0);
