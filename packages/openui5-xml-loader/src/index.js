@@ -45,9 +45,12 @@ module.exports = function (source) {
     const view = result[key];
 
     const viewAttributes = view.$;
+    let controllerName;
     Object.keys(viewAttributes).forEach((key) => {
       if (key.substr(0, 5) === 'xmlns') {
         namespaces[key.substr(6)] = viewAttributes[key].replace(/\./g, '/');
+      } else if (key === "controllerName") {
+        controllerName = `${viewAttributes["controllerName"].replace(/\./g, '/')}.controller`;
       }
     });
     processNodes(view);
@@ -57,6 +60,11 @@ module.exports = function (source) {
       this.addDependency(path);
       requires += `sap.ui.requireSync("${path}");\n`;
     });
+    if (controllerName) {
+      const path = replaceModulePaths(controllerName);
+      this.addDependency(path);
+      requires += `sap.ui.requireSync("${path}");\n`;
+    }
 
     const output = `
       ${requires}
