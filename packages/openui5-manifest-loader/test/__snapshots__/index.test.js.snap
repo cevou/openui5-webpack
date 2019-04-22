@@ -3,6 +3,7 @@
 exports[`Renderer Loader should add dependencies 1`] = `
 "sap.ui.requireSync(\\"sap/ui/core/library\\");
 sap.ui.requireSync(\\"sap/m/library\\");
+sap.ui.requireSync(\\"sap/ui/core/mvc/XMLView\\");
 sap.ui.requireSync(\\"./view/App.view.xml\\");
 sap.ui.requireSync(\\"sap/ui/model/resource/ResourceModel\\");
 sap.ui.requireSync(\\"sap/ui/model/json/JSONModel\\");

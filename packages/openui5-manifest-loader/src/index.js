@@ -25,9 +25,9 @@ module.exports = function (source) {
   const rootView = jp.value(manifest, jp.stringify(["$", "sap.ui5", "rootView"]));
   if (rootView) {
     if (rootView.type) {
-      this.addDependency(`sap/ui/core/mvc/${rootView.type}View`);
+      addDependency(`sap/ui/core/mvc/${rootView.type}View`);
     }
-    if (rootView.viewName) {
+    if (rootView.viewName && rootView.type) {
       addDependency(`.${rootView.viewName.replace(appId, "").replace(/\./g, "/")}.view.${rootView.type.toLowerCase()}`);
     }
   }

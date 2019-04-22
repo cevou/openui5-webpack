@@ -1,5 +1,6 @@
 const cssnano = require('cssnano');
 const lessOpenUI5 = require('less-openui5');
+const path = require("path");
 const { OriginalSource } = require('webpack-sources');
 const NullFactory = require('webpack/lib/NullFactory');
 const LocalModuleDependency = require('webpack/lib/dependencies/LocalModuleDependency');
@@ -30,6 +31,7 @@ class OpenUI5Plugin {
 
   apply(compiler) {
     const { options } = this;
+    const { modulePath } = options;
 
     const resourceModuleFactory = new ResourceModuleFactory(compiler.resolverFactory);
     const dynamicContextModuleFactory = new DynamicContextModuleFactory(options.requireSync);
@@ -75,6 +77,19 @@ class OpenUI5Plugin {
         new GlobalDependencyParserPlugin().apply(parser);
         new ViewDependencyParserPlugin(options).apply(parser);
         new ResourceDependencyParserPlugin(options).apply(parser);
+      });
+
+      // Resolve module path
+      normalModuleFactory.hooks.beforeResolve.tap('OpenUI5Plugin', (options) => {
+        const { context, request } = options;
+        if (request.startsWith(modulePath)) {
+          let relative = path.relative(context, compilation.options.context);
+          if (relative.substr(0, 1) !== '.') {
+            relative = `.${relative}`;
+          }
+
+          options.request = request.replace(modulePath, relative);
+        }
       });
 
       compilation.hooks.optimizeTree.tapAsync('OpenUI5Plugin', (chunks, modules, callback) => {
