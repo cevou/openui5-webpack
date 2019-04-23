@@ -134,7 +134,7 @@ class OpenUI5Plugin {
               const libPath = `${lib.replace(/\./g, '/')}/themes/${theme}`;
               const promise = builder.build({
                 lessInputPath: `${libPath}/library.source.less`,
-                rootPaths: options.rootPaths,
+                rootPaths: compilation.options.resolve.modules,
                 library: {
                   name: lib,
                 },
