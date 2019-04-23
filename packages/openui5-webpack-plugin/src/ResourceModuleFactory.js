@@ -21,6 +21,7 @@ class ResourceModuleFactory extends Tapable {
     const translations = dependency.translations;
     const locales = dependency.locales ? dependency.locales : dependency.translations;
     const failOnError = dependency.failOnError;
+    const manifest = dependency.manifest;
 
     const messagebundles = ['messagebundle.properties'];
     translations.forEach((translation) => {
@@ -37,6 +38,10 @@ class ResourceModuleFactory extends Tapable {
     locales.forEach((translation) => {
       resources.push(`sap/ui/core/cldr/${translation}.json`);
     });
+
+    if (manifest) {
+      resources.push(manifest);
+    }
 
     const normalResolver = this.resolverFactory.get('normal', resolveOptions || {});
 

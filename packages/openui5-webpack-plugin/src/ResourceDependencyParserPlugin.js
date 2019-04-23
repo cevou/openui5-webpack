@@ -14,6 +14,7 @@ class ResourceDependencyParserPlugin {
       const extensions = resources.extensions || ['properties', 'xml'];
       const translations = options.translations || [];
       const libraries = options.libs || [];
+      const manifest = options.manifest;
       const arg = expr.arguments[0];
 
       let param;
@@ -51,6 +52,7 @@ class ResourceDependencyParserPlugin {
         extensions,
         libraries,
         translations,
+        manifest,
         foe ? foe.bool : true,
         false,
         expr.range,
@@ -67,6 +69,7 @@ class ResourceDependencyParserPlugin {
       const extensions = resources.extensions || ['properties', 'xml'];
       const translations = options.translations || [];
       const libraries = options.libs || [];
+      const manifest = options.manifest;
       const arg1 = expr.arguments[0];
       const arg2 = expr.arguments[1];
 
@@ -123,8 +126,9 @@ class ResourceDependencyParserPlugin {
         extensions,
         libraries,
         translations,
+        manifest,
         foe ? foe.bool : true,
-        async ? async.bool : false,
+        async,
         expr.range,
         param.range,
       );

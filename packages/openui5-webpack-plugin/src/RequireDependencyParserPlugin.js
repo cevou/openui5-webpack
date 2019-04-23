@@ -100,6 +100,15 @@ class RequireDependencyParserPlugin {
       }
       return result;
     });
+
+    parser.hooks.call.for('sap.ui.require.bind').tap('OpenUI5Plugin', (expr) => {
+      // special case for core _executeOnInit
+      if (expr.arguments[1].type === 'ArrayExpression') {
+        const arg1 = expr.arguments[1];
+        const param = parser.evaluateExpression(arg1);
+        return processContext(expr, param.items[0]);
+      }
+    });
   }
 }
 module.exports = RequireDependencyParserPlugin;

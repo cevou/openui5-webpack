@@ -27,7 +27,7 @@ class ResourceModule extends Module {
     };
 
     this.dependencies = this.options.resources.map((resource) => {
-      const userRequest = resource.indexOf('cldr') > -1 ? resource : `./${resource}`;
+      const userRequest = resource.indexOf('cldr') > -1 || resource.startsWith("./") ? resource : `./${resource}`;
       const dep = new ContextElementDependency(resource, userRequest);
       dep.optional = true;
       dep.modulePath = this.options.modulePath;

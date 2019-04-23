@@ -191,7 +191,7 @@ exports[`Integration TestCases loader-extension 1`] = `
 /***/ (function(module, exports, __webpack_require__) {
 
 const a = 'a.xml';
-__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true);
+__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\").replace(/\\\\?[^?]*$/, \\"\\"), true);
 
 
 /***/ }),
@@ -236,14 +236,6 @@ exports[`Integration TestCases loader-extension-async 1`] = `
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const a = 'a.xml';
-Promise.resolve().then(function() { return __webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true); });
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var map = {
 	\\"./a.xml\\": 2
 };
@@ -270,11 +262,21 @@ openui5Resource.keys = function openui5ResourceKeys() {
   return Object.keys(map);
 };
 openui5Resource.resolve = openui5ResourceResolve;
-openui5Resource.id = 1;
+openui5Resource.id = 0;
 module.exports = openui5Resource;
 
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const a = 'a.xml';
+const bAsync = true;
+Promise.resolve().then(function() { return __webpack_require__(0)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\").replace(/\\\\?[^?]*$/, \\"\\"), true); });
+function() { var OPENUI5_DYNAMIC = __webpack_require__(0)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\").replace(/\\\\?[^?]*$/, \\"\\"), true); return (typeof bAsync !== \\"undefined\\" ? bAsync : false) ? Promise.resolve().then(function() { return OPENUI5_DYNAMIC }) : OPENUI5_DYNAMIC;}();
+
+
 /***/ })
-],[[0,1]]]);"
+],[[1,1]]]);"
 `;
 
 exports[`Integration TestCases loader-extension-object 1`] = `
@@ -283,7 +285,7 @@ exports[`Integration TestCases loader-extension-object 1`] = `
 /***/ (function(module, exports, __webpack_require__) {
 
 const a = 'a.xml';
-__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true);
+__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\").replace(/\\\\?[^?]*$/, \\"\\"), true);
 
 
 /***/ }),
@@ -520,7 +522,7 @@ exports[`Integration TestCases resource 1`] = `
 /***/ (function(module, exports, __webpack_require__) {
 
 const a = 'a.xml';
-__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true);
+__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\").replace(/\\\\?[^?]*$/, \\"\\"), true);
 
 
 /***/ }),
@@ -566,7 +568,7 @@ exports[`Integration TestCases resource-fail-on-error 1`] = `
 /***/ (function(module, exports, __webpack_require__) {
 
 const a = 'sap/ui/test/a.xml';
-__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\"), false);
+__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\").replace(/\\\\?[^?]*$/, \\"\\"), false);
 
 
 /***/ }),
@@ -612,7 +614,7 @@ exports[`Integration TestCases resource-library 1`] = `
 /***/ (function(module, exports, __webpack_require__) {
 
 const a = 'sap/ui/test/a.xml';
-__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\"), true);
+__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\").replace(/\\\\?[^?]*$/, \\"\\"), true);
 
 
 /***/ }),
@@ -662,7 +664,7 @@ exports[`Integration TestCases resource-object 1`] = `
 /***/ (function(module, exports, __webpack_require__) {
 
 const a = 'a.xml';
-__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\"), true);
+__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?/, \\".\\").replace(/\\\\?[^?]*$/, \\"\\"), true);
 
 
 /***/ }),
@@ -708,7 +710,7 @@ exports[`Integration TestCases resource-path-replace 1`] = `
 /***/ (function(module, exports, __webpack_require__) {
 
 const a = 'sap/ui/test/a.xml';
-__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\"), true);
+__webpack_require__(1)((a).replace(/^(?:\\\\.\\\\/)?sap\\\\/ui\\\\/test/, \\".\\").replace(/\\\\?[^?]*$/, \\"\\"), true);
 
 
 /***/ }),
