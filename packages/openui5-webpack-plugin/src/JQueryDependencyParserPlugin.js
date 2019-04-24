@@ -6,7 +6,7 @@ class JQueryDependencyParserPlugin {
     const processItem = (expr, param, range) => {
       if (param.isString()) {
         let item = param.string;
-        if (!item.match(/j[Qq]uery\.sap/) && item.substr(0, 2) !== './') {
+        if (item.match(/^sap\.ui\./) && !item.match(/j[Qq]uery\.sap/)) {
           item = item.replace(/\./g, '/');
         }
         const dep = new JQueryItemDependency(item, range);

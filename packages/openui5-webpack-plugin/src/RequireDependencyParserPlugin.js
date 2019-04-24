@@ -13,8 +13,8 @@ class RequireDependencyParserPlugin {
     const processItem = (expr, param, range) => {
       if (param.isString()) {
         let item = param.string;
-        if (!item.match(/j[Qq]uery\.sap/) && !item.match(/\.controller/) && item.substr(0, 2) !== './' && item.substr(0, 3) !== '../') {
-          item = item.replace(/\./g, '/');
+        if (item.match(/^sap\.ui\./) && !item.match(/j[Qq]uery\.sap/)) {
+           item = item.replace(/\./g, '/');
         }
         const dep = new RequireItemDependency(item, range);
         dep.loc = expr.loc;

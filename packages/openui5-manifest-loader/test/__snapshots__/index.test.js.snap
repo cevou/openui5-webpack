@@ -2,11 +2,17 @@
 
 exports[`Renderer Loader should add dependencies 1`] = `
 "sap.ui.requireSync(\\"sap/ui/core/library\\");
+sap.ui.requireSync(\\"sap/ui/core/messagebundle.properties\\");
+sap.ui.requireSync(\\"sap/ui/core/messagebundle_en.properties\\");
 sap.ui.requireSync(\\"sap/m/library\\");
+sap.ui.requireSync(\\"sap/m/messagebundle.properties\\");
+sap.ui.requireSync(\\"sap/m/messagebundle_en.properties\\");
 sap.ui.requireSync(\\"sap/ui/core/mvc/XMLView\\");
 sap.ui.requireSync(\\"./view/App.view.xml\\");
 sap.ui.requireSync(\\"sap/ui/model/resource/ResourceModel\\");
+sap.ui.requireSync(\\"./i18n/i18n.properties\\");
+sap.ui.requireSync(\\"./i18n/i18n_en.properties\\");
 sap.ui.requireSync(\\"sap/ui/model/json/JSONModel\\");
 sap.ui.requireSync(\\"sap/ui/core/routing/Router\\");
-module.exports={\\"sap.app\\":{\\"id\\":\\"sap.ui.demo.todo\\",\\"type\\":\\"application\\"},\\"sap.ui5\\":{\\"dependencies\\":{\\"libs\\":{\\"sap.ui.core\\":{},\\"sap.m\\":{}}},\\"rootView\\":{\\"viewName\\":\\"sap.ui.demo.todo.view.App\\",\\"type\\":\\"XML\\"},\\"models\\":{\\"i18n\\":{\\"type\\":\\"sap.ui.model.resource.ResourceModel\\"},\\"\\":{\\"type\\":\\"sap.ui.model.json.JSONModel\\"}},\\"routing\\":{\\"config\\":{\\"routerClass\\":\\"sap.ui.core.routing.Router\\"}}}}"
+module.exports={\\"sap.app\\":{\\"id\\":\\"sap.ui.demo.todo\\",\\"type\\":\\"application\\"},\\"sap.ui5\\":{\\"dependencies\\":{\\"libs\\":{\\"sap.ui.core\\":{},\\"sap.m\\":{}}},\\"rootView\\":{\\"viewName\\":\\"sap.ui.demo.todo.view.App\\",\\"type\\":\\"XML\\"},\\"models\\":{\\"i18n\\":{\\"type\\":\\"sap.ui.model.resource.ResourceModel\\",\\"settings\\":{\\"bundleName\\":\\"sap.ui.demo.todo.i18n.i18n\\"}},\\"\\":{\\"type\\":\\"sap.ui.model.json.JSONModel\\"}},\\"routing\\":{\\"config\\":{\\"routerClass\\":\\"sap.ui.core.routing.Router\\"}}}}"
 `;

@@ -1,6 +1,17 @@
 import jp from 'jsonpath';
+import loaderUtils from 'loader-utils';
 
 module.exports = function (source) {
+  const defaultOptions = {
+    translations: ["en"],
+  };
+
+  const options = Object.assign(
+    {},
+    defaultOptions,
+    loaderUtils.getOptions(this),
+  );
+
   const manifest = JSON.parse(source);
   const dependencies = [];
 
@@ -17,8 +28,15 @@ module.exports = function (source) {
   if (libraries) {
     const libs = Object.keys(libraries);
     for (let i = 0; i < libs.length; i++) {
-      const lib = libs[i];
-      addDependency(`${lib.replace(/\./g, "/")}/library`);
+      const lib = libs[i].replace(/\./g, "/");
+      addDependency(`${lib}/library`);
+
+      // add messagebundles for UI texts
+      addDependency(`${lib}/messagebundle.properties`);
+      for (let j = 0; j < options.translations.length; j++) {
+        const translation = options.translations[j];
+        addDependency(`${lib}/messagebundle_${translation}.properties`);
+      }
     }
   }
 
@@ -32,10 +50,20 @@ module.exports = function (source) {
     }
   }
 
-  const models = jp.query(manifest, "$..models.*.type");
+  const models = jp.query(manifest, "$..models.*");
   for (let i = 0; i < models.length; i++) {
     const model = models[i];
-    addDependency(model.replace(/\./g, "/"));
+    addDependency(model.type.replace(/\./g, "/"));
+
+    // Add dependency for ResourceModel properties files
+    if (model.type === "sap.ui.model.resource.ResourceModel" && model.settings && model.settings.bundleName) {
+      const bundleName = `.${model.settings.bundleName.replace(appId, "").replace(/\./g, "/")}`;
+      addDependency(`${bundleName}.properties`);
+      for (let i = 0; i < options.translations.length; i++) {
+        const translation = options.translations[i];
+        addDependency(`${bundleName}_${translation}.properties`);
+      }
+    }
   }
 
   const routerClass = jp.value(manifest, "$..routerClass");
