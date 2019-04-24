@@ -98,14 +98,18 @@ class OpenUI5Plugin {
         for (const module of modules) {
           if (module instanceof DynamicContextModule) {
             dynamicContextModule = module;
-            continue;
-          }
-          if (module.loaders && module.loaders.filter(loader => loader.loader.indexOf("openui5-xml-loader") > -1).length > 0) {
+          } else if (module.loaders && module.loaders.filter(loader => loader.loader.indexOf("openui5-xml-loader") > -1).length > 0) {
             dependencies = [...dependencies, ...module.dependencies];
           }
         }
+        if (options.libs) {
+          // UI5 core makes dynamic request for libraries specified in manifest
+          for (const lib of options.libs) {
+            dependencies = [...dependencies, new RequireItemDependency(`${lib.replace(/\./g, "/")}/library`, null, false)];
+          }
+        }
         if (dynamicContextModule) {
-          dynamicContextModule.addViewDependencies(dependencies);
+          dynamicContextModule.addAdditionalDependencies(dependencies);
           compilation.rebuildModule(dynamicContextModule, (err) => {
             if (err) {
               compilation.errors.push(err);
