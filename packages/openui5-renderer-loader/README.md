@@ -17,3 +17,7 @@
 ```bash
 npm install --save-dev openui5-renderer-loader
 ```
+
+<h2 align="center">What it does</h2>
+
+The `openui5-renderer-loader` checks if there is a renderer available for a control and adds it as a dependency.

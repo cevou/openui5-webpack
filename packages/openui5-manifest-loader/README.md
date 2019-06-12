@@ -17,3 +17,7 @@
 ```bash
 npm install --save-dev openui5-manifest-loader
 ```
+
+<h2 align="center">What it does</h2>
+
+The `openui5-manifest-loader` parses OpenUI5 manifest files, detects all dependencies and adds them as dependencies.

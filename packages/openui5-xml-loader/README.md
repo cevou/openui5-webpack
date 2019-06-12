@@ -17,3 +17,7 @@
 ```bash
 npm install --save-dev openui5-xml-loader
 ```
+
+<h2 align="center">What it does</h2>
+
+The `openui5-xml-loader` parses XML views, detects all dependencies and adds them as dependencies of that specific view.
